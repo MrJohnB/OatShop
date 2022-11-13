@@ -18,8 +18,10 @@ public class CustomersController : ControllerBase
 
     // GET: api/<CustomersController>
     [HttpGet]
-    public async Task<IActionResult> GetAsync()
+    public async Task<IActionResult> GetAllAsync()
     {
+        _logger.LogDebug($"Entering controller method: {nameof(GetAllAsync)}");
+
         var customers = await _customerService.GetAsync();
 
         if (customers is null || customers.Count == 0)
@@ -32,8 +34,10 @@ public class CustomersController : ControllerBase
 
     // GET api/<CustomersController>/5
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(int id)
+    public async Task<IActionResult> GetByIdAsync(int id)
     {
+        _logger.LogDebug($"Entering controller method: {nameof(GetByIdAsync)}");
+
         if (id == 0)
         {
             return BadRequest("Id parameter cannot be 0.");
@@ -53,6 +57,8 @@ public class CustomersController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] Customer customer)
     {
+        _logger.LogDebug($"Entering controller method: {nameof(CreateAsync)}");
+
         if (customer is null)
         {
             return BadRequest("Customer parameter cannot be null.");
@@ -71,7 +77,7 @@ public class CustomersController : ControllerBase
         }
 
         return CreatedAtAction(
-            actionName: nameof(GetAsync),
+            actionName: nameof(GetByIdAsync),
             routeValues: new { createdCustomer.Id },
             value: createdCustomer);
     }
@@ -80,6 +86,8 @@ public class CustomersController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateAsync(int id, [FromBody] Customer customer)
     {
+        _logger.LogDebug($"Entering controller method: {nameof(UpdateAsync)}");
+
         if (id != customer.Id)
             return BadRequest("Id field and Customer.Id field do not match.");
 
@@ -93,8 +101,10 @@ public class CustomersController : ControllerBase
 
     // DELETE api/<CustomersController>/5
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(int id)
+    public async Task<IActionResult> DeleteByIdAsync(int id)
     {
+        _logger.LogDebug($"Entering controller method: {nameof(DeleteByIdAsync)}");
+
         if (id == 0)
         {
             return BadRequest("Id parameter cannot be 0.");

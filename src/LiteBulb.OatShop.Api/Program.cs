@@ -1,5 +1,6 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Configuration;
 using LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Configuration;
+using Serilog;
 
 namespace LiteBulb.OatShop.Api;
 
@@ -30,7 +31,15 @@ public static class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        // Logging
+        builder.Host.UseSerilog((context, configuration) =>
+            configuration.ReadFrom.Configuration(context.Configuration));
+
+        //builder.Services.BuildServiceProvider(validateScopes: true);
+
         var app = builder.Build();
+
+        app.UseSerilogRequestLogging();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
@@ -42,7 +51,6 @@ public static class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
-
 
         app.MapControllers();
 
