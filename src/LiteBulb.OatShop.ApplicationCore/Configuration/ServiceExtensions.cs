@@ -11,5 +11,6 @@ public static class ServiceExtensions
             .AddScoped<ICustomerService, CustomerService>()
             .AddScoped<IOrderService, OrderService>()
             .AddScoped<IProductService, ProductService>();
+            // AddSingleton<IProductService, CachedProductService>();
     }
 }

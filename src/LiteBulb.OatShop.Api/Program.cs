@@ -22,7 +22,7 @@ public static class Program
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddApplicationDbContext(connectionString);
 
-        // Add service registrations
+        // Add custom service registrations
         builder.Services.AddRepositories();
         builder.Services.AddServices();
 
