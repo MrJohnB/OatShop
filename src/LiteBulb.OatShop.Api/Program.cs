@@ -6,6 +6,8 @@ namespace LiteBulb.OatShop.Api;
 
 public static class Program
 {
+    private const string ConnectionStringName = "DefaultConnection";
+
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +22,7 @@ public static class Program
         });
 
         // Add EntityFramework Core
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        var connectionString = builder.Configuration.GetConnectionString(ConnectionStringName);
         builder.Services.AddApplicationDbContext(connectionString);
 
         // Add custom service registrations
@@ -49,6 +51,11 @@ public static class Program
         }
 
         app.UseHttpsRedirection();
+        app.UseCors(options => options // Call to UseCors() must be placed after UseRouting, but before UseAuthorization
+    .AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod());
+
 
         app.UseAuthorization();
 
