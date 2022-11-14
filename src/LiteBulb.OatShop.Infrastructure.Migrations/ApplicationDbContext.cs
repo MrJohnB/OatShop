@@ -34,7 +34,7 @@ namespace LiteBulb.OatShop.Infrastructure.Migrations
         {
             IConfiguration configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddUserSecrets("74e89807-cf95-445b-9e50-6cf5e6bf0861")
+                .AddUserSecrets<ApplicationDbContext>(optional: true)
                 .Build();
 
             return configuration.GetConnectionString(ConnectionStringName);
