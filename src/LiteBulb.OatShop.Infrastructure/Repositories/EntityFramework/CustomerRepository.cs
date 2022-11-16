@@ -1,5 +1,5 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
-using LiteBulb.OatShop.ApplicationCore.Interfaces.Repositories;
+using LiteBulb.OatShop.ApplicationCore.Interfaces.Repositories.Data;
 using LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

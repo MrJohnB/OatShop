@@ -1,6 +1,6 @@
-﻿using LiteBulb.OatShop.ApplicationCore.Interfaces.Services;
+﻿using LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Data;
 using LiteBulb.OatShop.ApplicationCore.Interfaces.Services.FeeCalculation;
-using LiteBulb.OatShop.ApplicationCore.Services;
+using LiteBulb.OatShop.ApplicationCore.Services.Data;
 using LiteBulb.OatShop.ApplicationCore.Services.FeeCalculation;
 using Microsoft.Extensions.DependencyInjection;
 

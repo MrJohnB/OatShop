@@ -11,8 +11,8 @@ public static class OrderExtensions
     public static decimal CalculateOrderTotal(this Order order)
     {
         var discount = Math.Round(
-                order.Subtotal * order.Discount,
-                MidpointRounding.ToEven);
+            order.Subtotal * order.Discount,
+            MidpointRounding.ToEven);
 
         return order.Subtotal - discount;
     }
@@ -20,8 +20,8 @@ public static class OrderExtensions
     public static decimal CalculateItemNetPrice(this OrderItem orderItem)
     {
         var discount = Math.Round(
-                orderItem.OriginalPrice * orderItem.Discount,
-                MidpointRounding.ToEven);
+            orderItem.OriginalPrice * orderItem.Discount,
+            MidpointRounding.ToEven);
 
         return orderItem.OriginalPrice - discount;
     }

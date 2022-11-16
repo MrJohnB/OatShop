@@ -1,9 +1,9 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
-using LiteBulb.OatShop.ApplicationCore.Interfaces.Repositories;
-using LiteBulb.OatShop.ApplicationCore.Interfaces.Services;
+using LiteBulb.OatShop.ApplicationCore.Interfaces.Repositories.Data;
+using LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Data;
 using Microsoft.Extensions.Logging;
 
-namespace LiteBulb.OatShop.ApplicationCore.Services;
+namespace LiteBulb.OatShop.ApplicationCore.Services.Data;
 public class OrderService : IOrderService
 {
     private readonly ILogger<OrderService> _logger;

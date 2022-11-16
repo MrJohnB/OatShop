@@ -1,4 +1,4 @@
-﻿using LiteBulb.OatShop.ApplicationCore.Interfaces.Repositories;
+﻿using LiteBulb.OatShop.ApplicationCore.Interfaces.Repositories.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

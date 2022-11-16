@@ -1,5 +1,5 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
-using LiteBulb.OatShop.ApplicationCore.Interfaces.Services;
+using LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiteBulb.OatShop.Api.Controllers;

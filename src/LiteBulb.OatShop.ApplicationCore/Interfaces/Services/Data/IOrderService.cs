@@ -1,6 +1,6 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
 
-namespace LiteBulb.OatShop.ApplicationCore.Interfaces.Services;
+namespace LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Data;
 public interface IOrderService
 {
     Task<Order> AddAsync(Order dto);
