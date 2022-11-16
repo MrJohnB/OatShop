@@ -3,7 +3,7 @@
 namespace LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Mappers;
 internal static class CustomerMapper
 {
-    internal static Customer ToDto(this Entities.Customer entity)
+    internal static Customer Map(this Entities.Customer entity)
     {
         ArgumentNullException.ThrowIfNull(entity, nameof(entity));
 
@@ -22,13 +22,13 @@ internal static class CustomerMapper
             State = entity.State,
             County = entity.County,
             Country = entity.Country,
-            Orders = entity.Orders.ToDto(),
+            Orders = entity.Orders.MapMany(),
             Created = entity.Created,
             Updated = entity.Updated
         };
     }
 
-    internal static ICollection<Customer> ToDto(this ICollection<Entities.Customer> entities)
+    internal static ICollection<Customer> MapMany(this ICollection<Entities.Customer> entities)
     {
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
@@ -36,13 +36,13 @@ internal static class CustomerMapper
 
         foreach (var entity in entities)
         {
-            dtos.Add(ToDto(entity));
+            dtos.Add(Map(entity));
         }
 
         return dtos;
     }
 
-    internal static Entities.Customer ToEntity(this Customer dto)
+    internal static Entities.Customer Map(this Customer dto)
     {
         ArgumentNullException.ThrowIfNull(dto, nameof(dto));
 
@@ -61,13 +61,13 @@ internal static class CustomerMapper
             State = dto.State,
             County = dto.County,
             Country = dto.Country,
-            Orders = dto.Orders.ToEntity(),
+            Orders = dto.Orders.MapMany(),
             Created = dto.Created,
             Updated = dto.Updated
         };
     }
 
-    internal static ICollection<Entities.Customer> ToEntity(this ICollection<Customer> dtos)
+    internal static ICollection<Entities.Customer> MapMany(this ICollection<Customer> dtos)
     {
         ArgumentNullException.ThrowIfNull(dtos, nameof(dtos));
 
@@ -75,7 +75,7 @@ internal static class CustomerMapper
 
         foreach (var dto in dtos)
         {
-            entities.Add(ToEntity(dto));
+            entities.Add(Map(dto));
         }
 
         return entities;

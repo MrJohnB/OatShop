@@ -3,7 +3,7 @@
 namespace LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Mappers;
 internal static class OrderItemMapper
 {
-    internal static OrderItem ToDto(this Entities.OrderItem entity)
+    internal static OrderItem Map(this Entities.OrderItem entity)
     {
         ArgumentNullException.ThrowIfNull(entity, nameof(entity));
 
@@ -11,7 +11,7 @@ internal static class OrderItemMapper
         {
             Id = entity.Id,
             OrderId = entity.OrderId,
-            Product = entity.Product?.ToDto(),
+            Product = entity.Product?.Map(),
             Name = entity.Name,
             OriginalPrice = entity.OriginalPrice,
             Discount = entity.Discount,
@@ -20,7 +20,7 @@ internal static class OrderItemMapper
         };
     }
 
-    internal static ICollection<OrderItem> ToDto(this ICollection<Entities.OrderItem> entities)
+    internal static ICollection<OrderItem> MapMany(this ICollection<Entities.OrderItem> entities)
     {
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
@@ -28,13 +28,13 @@ internal static class OrderItemMapper
 
         foreach (var entity in entities)
         {
-            dtos.Add(ToDto(entity));
+            dtos.Add(Map(entity));
         }
 
         return dtos;
     }
 
-    internal static Entities.OrderItem ToEntity(this OrderItem dto)
+    internal static Entities.OrderItem Map(this OrderItem dto)
     {
         ArgumentNullException.ThrowIfNull(dto, nameof(dto));
 
@@ -42,7 +42,7 @@ internal static class OrderItemMapper
         {
             Id = dto.Id,
             OrderId = dto.OrderId,
-            Product = dto.Product?.ToEntity(),
+            Product = dto.Product?.Map(),
             Name = dto.Name,
             OriginalPrice = dto.OriginalPrice,
             Discount = dto.Discount,
@@ -51,7 +51,7 @@ internal static class OrderItemMapper
         };
     }
 
-    internal static ICollection<Entities.OrderItem> ToEntity(this ICollection<OrderItem> dtos)
+    internal static ICollection<Entities.OrderItem> MapMany(this ICollection<OrderItem> dtos)
     {
         ArgumentNullException.ThrowIfNull(dtos, nameof(dtos));
 
@@ -59,7 +59,7 @@ internal static class OrderItemMapper
 
         foreach (var dto in dtos)
         {
-            entities.Add(ToEntity(dto));
+            entities.Add(Map(dto));
         }
 
         return entities;

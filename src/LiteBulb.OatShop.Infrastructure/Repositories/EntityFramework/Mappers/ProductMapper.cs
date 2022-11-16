@@ -3,7 +3,7 @@
 namespace LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Mappers;
 internal static class ProductMapper
 {
-    internal static Product ToDto(this Entities.Product entity)
+    internal static Product Map(this Entities.Product entity)
     {
         ArgumentNullException.ThrowIfNull(entity, nameof(entity));
 
@@ -20,7 +20,7 @@ internal static class ProductMapper
         };
     }
 
-    internal static ICollection<Product> ToDto(this ICollection<Entities.Product> entities)
+    internal static ICollection<Product> MapMany(this ICollection<Entities.Product> entities)
     {
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
@@ -28,13 +28,13 @@ internal static class ProductMapper
         
         foreach (var entity in entities)
         {
-            dtos.Add(ToDto(entity));
+            dtos.Add(Map(entity));
         }
 
         return dtos;
     }
 
-    internal static Entities.Product ToEntity(this Product dto)
+    internal static Entities.Product Map(this Product dto)
     {
         ArgumentNullException.ThrowIfNull(dto, nameof(dto));
 
@@ -51,7 +51,7 @@ internal static class ProductMapper
         };
     }
 
-    internal static ICollection<Entities.Product> ToEntity(this ICollection<Product> dtos)
+    internal static ICollection<Entities.Product> MapMany(this ICollection<Product> dtos)
     {
         ArgumentNullException.ThrowIfNull(dtos, nameof(dtos));
 
@@ -59,7 +59,7 @@ internal static class ProductMapper
 
         foreach (var dto in dtos)
         {
-            entities.Add(ToEntity(dto));
+            entities.Add(Map(dto));
         }
 
         return entities;

@@ -23,7 +23,7 @@ public class ProductRepository : IProductRepository
         var entities = await _dbSet
             .ToArrayAsync();
 
-        return entities.ToDto();
+        return entities.MapMany();
     }
 
     public async Task<Product?> GetAsync(int id)
@@ -36,12 +36,12 @@ public class ProductRepository : IProductRepository
             return null;
         }
 
-        return entity.ToDto();
+        return entity.Map();
     }
 
     public async Task<Product> AddAsync(Product dto)
     {
-        var entity = dto.ToEntity();
+        var entity = dto.Map();
 
         _dbContext.Add(entity);
         var entryCount = await _dbContext.SaveChangesAsync();
@@ -68,7 +68,7 @@ public class ProductRepository : IProductRepository
             return 0; // deleted count
         }
 
-        var entity = dto.ToEntity();
+        var entity = dto.Map();
 
         _dbContext.Update(entity);
         return await _dbContext.SaveChangesAsync(); // updated count

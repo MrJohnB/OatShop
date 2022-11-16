@@ -24,7 +24,7 @@ public class OrderRepository : IOrderRepository
             .Include(x => x.OrderItems)
             .ToArrayAsync();
 
-        return entities.ToDto();
+        return entities.MapMany();
     }
 
     public async Task<Order?> GetAsync(int id)
@@ -37,12 +37,12 @@ public class OrderRepository : IOrderRepository
             return null;
         }
 
-        return entity.ToDto();
+        return entity.Map();
     }
 
     public async Task<Order> AddAsync(Order dto)
     {
-        var entity = dto.ToEntity();
+        var entity = dto.Map();
 
         _dbContext.Add(entity);
         var entryCount = await _dbContext.SaveChangesAsync();
@@ -69,7 +69,7 @@ public class OrderRepository : IOrderRepository
             return 0; // deleted count
         }
 
-        var entity = dto.ToEntity();
+        var entity = dto.Map();
 
         _dbContext.Update(entity);
         return await _dbContext.SaveChangesAsync(); // updated count

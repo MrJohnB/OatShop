@@ -24,7 +24,7 @@ public class CustomerRepository : ICustomerRepository
             .Include(x => x.Orders)
             .ToArrayAsync();
 
-        return entities.ToDto();
+        return entities.MapMany();
     }
 
     public async Task<Customer?> GetAsync(int id)
@@ -38,12 +38,12 @@ public class CustomerRepository : ICustomerRepository
             return null;
         }
 
-        return entity.ToDto();
+        return entity.Map();
     }
 
     public async Task<Customer> AddAsync(Customer dto)
     {
-        var entity = dto.ToEntity();
+        var entity = dto.Map();
 
         _dbContext.Add(entity);
         var entryCount = await _dbContext.SaveChangesAsync();
@@ -70,7 +70,7 @@ public class CustomerRepository : ICustomerRepository
             return 0; // deleted count
         }
 
-        var entity = dto.ToEntity();
+        var entity = dto.Map();
 
         _dbContext.Update(entity);
         return await _dbContext.SaveChangesAsync(); // updated count
