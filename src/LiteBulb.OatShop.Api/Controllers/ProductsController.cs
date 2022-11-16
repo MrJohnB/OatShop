@@ -7,6 +7,8 @@ namespace LiteBulb.OatShop.Api.Controllers;
 [ApiController]
 public class ProductsController : ControllerBase
 {
+    // TODO: do mapping from Model to DTO in controller?
+
     private readonly ILogger<ProductsController> _logger;
     private readonly IProductService _productService;
 
@@ -22,14 +24,24 @@ public class ProductsController : ControllerBase
     {
         _logger.LogDebug($"Entering controller method: {nameof(GetAllAsync)}");
 
-        var products = await _productService.GetAsync();
+        var response = await _productService.GetAsync();
 
-        if (products is null || products.Count == 0)
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        if (response.HasErrors)
+        {
+            return NotFound(response.ErrorMessage);
+        }
+
+        if (response.Result is null || response.Result.Count == 0)
         {
             return NotFound();
         }
 
-        return Ok(products);
+        return Ok(response.Result);
     }
 
     // GET api/<ProductsController>/5
@@ -43,14 +55,24 @@ public class ProductsController : ControllerBase
             return BadRequest("Id parameter cannot be 0.");
         }
 
-        var product = await _productService.GetAsync(id);
+        var response = await _productService.GetAsync(id);
 
-        if (product is null)
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        if (response.HasErrors)
+        {
+            return NotFound(response.ErrorMessage);
+        }
+
+        if (response.Result is null)
         {
             return NotFound();
         }
 
-        return Ok(product);
+        return Ok(response.Result);
     }
 
     // POST api/<ProductsController>
@@ -69,17 +91,27 @@ public class ProductsController : ControllerBase
             return BadRequest("Product.Id parameter cannot be null.");
         }
 
-        var createdProduct = await _productService.AddAsync(product);
+        var response = await _productService.AddAsync(product);
 
-        if (createdProduct is null || createdProduct.Id == 0)
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        if (response.HasErrors)
+        {
+            return Ok(response.ErrorMessage);
+        }
+
+        if (response.Result is null)
         {
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
         return CreatedAtAction(
             actionName: nameof(GetByIdAsync),
-            routeValues: new { createdProduct.Id },
-            value: createdProduct);
+            routeValues: new { response.Result.Id },
+            value: response.Result);
     }
 
     // PUT api/<ProductsController>/5
@@ -91,12 +123,19 @@ public class ProductsController : ControllerBase
         if (id != product.Id)
             return BadRequest("Id field and Product.Id field do not match.");
 
-        var updatedCount = await _productService.UpdateAsync(product);
+        var response = await _productService.UpdateAsync(product);
 
-        if (updatedCount == 0)
-            return NotFound();
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
 
-        return Ok(updatedCount);
+        if (response.HasErrors)
+        {
+            return NotFound(response.ErrorMessage);
+        }
+
+        return Ok(response.Result);
     }
 
     // DELETE api/<ProductsController>/5
@@ -110,11 +149,18 @@ public class ProductsController : ControllerBase
             return BadRequest("Id parameter cannot be 0.");
         }
 
-        var deletedCount = await _productService.DeleteAsync(id);
+        var response = await _productService.DeleteAsync(id);
 
-        if (deletedCount == 0)
-            return NotFound();
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
 
-        return Ok(deletedCount);
+        if (response.HasErrors)
+        {
+            return NotFound(response.ErrorMessage);
+        }
+
+        return Ok(response.Result);
     }
 }

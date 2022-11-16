@@ -26,9 +26,9 @@ public class CachedProductRepository : ICachedProductRepository, IProductReposit
         return product;
     }
 
-    public Task<int> DeleteAsync(int id)
+    public Task<int?> DeleteAsync(int id)
     {
-        _products.Remove(id);
+        _products.Remove(id); // TODO: return value if result if false?
         return _productRepository.DeleteAsync(id);
     }
 
@@ -47,7 +47,7 @@ public class CachedProductRepository : ICachedProductRepository, IProductReposit
         return _productRepository.GetAsync(id);
     }
 
-    public Task<int> UpdateAsync(Product dto)
+    public Task<int?> UpdateAsync(Product dto)
     {
         if (_products.ContainsKey(dto.Id))
         {

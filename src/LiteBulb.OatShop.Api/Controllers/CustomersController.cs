@@ -7,6 +7,8 @@ namespace LiteBulb.OatShop.Api.Controllers;
 [ApiController]
 public class CustomersController : ControllerBase
 {
+    // TODO: do mapping from Model to DTO in controller?
+
     private readonly ILogger<CustomersController> _logger;
     private readonly ICustomerService _customerService;
 
@@ -22,14 +24,24 @@ public class CustomersController : ControllerBase
     {
         _logger.LogDebug($"Entering controller method: {nameof(GetAllAsync)}");
 
-        var customers = await _customerService.GetAsync();
+        var response = await _customerService.GetAsync();
 
-        if (customers is null || customers.Count == 0)
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        if (response.HasErrors)
+        {
+            return NotFound(response.ErrorMessage);
+        }
+
+        if (response.Result is null || response.Result.Count == 0)
         {
             return NotFound();
         }
 
-        return Ok(customers);
+        return Ok(response.Result);
     }
 
     // GET api/<CustomersController>/5
@@ -43,14 +55,24 @@ public class CustomersController : ControllerBase
             return BadRequest("Id parameter cannot be 0.");
         }
 
-        var customer = await _customerService.GetAsync(id);
+        var response = await _customerService.GetAsync(id);
 
-        if (customer is null)
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        if (response.HasErrors)
+        {
+            return NotFound(response.ErrorMessage);
+        }
+
+        if (response.Result is null)
         {
             return NotFound();
         }
 
-        return Ok(customer);
+        return Ok(response.Result);
     }
 
     // POST api/<CustomersController>
@@ -69,17 +91,27 @@ public class CustomersController : ControllerBase
             return BadRequest("Customer.Id parameter cannot be null.");
         }
 
-        var createdCustomer = await _customerService.AddAsync(customer);
+        var response = await _customerService.AddAsync(customer);
 
-        if (createdCustomer is null || createdCustomer.Id == 0)
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        if (response.HasErrors)
+        {
+            return Ok(response.ErrorMessage);
+        }
+
+        if (response.Result is null)
         {
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
         return CreatedAtAction(
             actionName: nameof(GetByIdAsync),
-            routeValues: new { createdCustomer.Id },
-            value: createdCustomer);
+            routeValues: new { response.Result.Id },
+            value: response.Result);
     }
 
     // PUT api/<CustomersController>/5
@@ -91,12 +123,19 @@ public class CustomersController : ControllerBase
         if (id != customer.Id)
             return BadRequest("Id field and Customer.Id field do not match.");
 
-        var updatedCount = await _customerService.UpdateAsync(customer);
+        var response = await _customerService.UpdateAsync(customer);
 
-        if (updatedCount == 0)
-            return NotFound();
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
 
-        return Ok(updatedCount);
+        if (response.HasErrors)
+        {
+            return NotFound(response.ErrorMessage);
+        }
+
+        return Ok(response.Result);
     }
 
     // DELETE api/<CustomersController>/5
@@ -110,11 +149,18 @@ public class CustomersController : ControllerBase
             return BadRequest("Id parameter cannot be 0.");
         }
 
-        var deletedCount = await _customerService.DeleteAsync(id);
+        var response = await _customerService.DeleteAsync(id);
 
-        if (deletedCount == 0)
-            return NotFound();
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
 
-        return Ok(deletedCount);
+        if (response.HasErrors)
+        {
+            return NotFound(response.ErrorMessage);
+        }
+
+        return Ok(response.Result);
     }
 }

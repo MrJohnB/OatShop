@@ -58,7 +58,7 @@ public class CustomerRepository : ICustomerRepository
         return dto;
     }
 
-    public async Task<int> UpdateAsync(Customer dto)
+    public async Task<int?> UpdateAsync(Customer dto)
     {
         // TODO: 2 round trips to the database
 
@@ -67,7 +67,7 @@ public class CustomerRepository : ICustomerRepository
 
         if (!hasAny)
         {
-            return 0; // deleted count
+            return null; // id not found
         }
 
         var entity = dto.Map();
@@ -76,17 +76,19 @@ public class CustomerRepository : ICustomerRepository
         return await _dbContext.SaveChangesAsync(); // updated count
     }
 
-    public async Task<int> DeleteAsync(int id)
+    public async Task<int?> DeleteAsync(int id)
     {
+        // TODO: 2 round trips to the database
+
         var entity = await _dbSet
             .SingleOrDefaultAsync(x => x.Id == id);
 
         if (entity is null)
         {
-            return 0; // deleted count
+            return null; // id not found
         }
 
         _dbContext.Remove(entity);
-        return await _dbContext.SaveChangesAsync();
+        return await _dbContext.SaveChangesAsync(); // deleted count
     }
 }

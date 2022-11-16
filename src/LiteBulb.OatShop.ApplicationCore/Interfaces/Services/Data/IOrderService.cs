@@ -1,11 +1,12 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
+using LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Responses;
 
 namespace LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Data;
 public interface IOrderService
 {
-    Task<Order> AddAsync(Order dto);
-    Task<int> DeleteAsync(int id);
-    Task<ICollection<Order>> GetAsync();
-    Task<Order?> GetAsync(int id);
-    Task<int> UpdateAsync(Order dto);
+    Task<ServiceResponse<Order>> AddAsync(Order order);
+    Task<ServiceResponse<int>> DeleteAsync(int id);
+    Task<ServiceResponse<ICollection<Order>>> GetAsync();
+    Task<ServiceResponse<Order>> GetAsync(int id);
+    Task<ServiceResponse<int>> UpdateAsync(Order order);
 }

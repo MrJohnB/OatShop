@@ -7,6 +7,8 @@ namespace LiteBulb.OatShop.Api.Controllers;
 [ApiController]
 public class OrdersController : ControllerBase
 {
+    // TODO: do mapping from Model to DTO in controller?
+
     private readonly ILogger<OrdersController> _logger;
     private readonly IOrderService _orderService;
 
@@ -22,14 +24,24 @@ public class OrdersController : ControllerBase
     {
         _logger.LogDebug($"Entering controller method: {nameof(GetAllAsync)}");
 
-        var orders = await _orderService.GetAsync();
+        var response = await _orderService.GetAsync();
 
-        if (orders is null || orders.Count == 0)
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        if (response.HasErrors)
+        {
+            return NotFound(response.ErrorMessage);
+        }
+
+        if (response.Result is null || response.Result.Count == 0)
         {
             return NotFound();
         }
 
-        return Ok(orders);
+        return Ok(response.Result);
     }
 
     // GET api/<OrdersController>/5
@@ -43,14 +55,24 @@ public class OrdersController : ControllerBase
             return BadRequest("Id parameter cannot be 0.");
         }
 
-        var order = await _orderService.GetAsync(id);
+        var response = await _orderService.GetAsync(id);
 
-        if (order is null)
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        if (response.HasErrors)
+        {
+            return NotFound(response.ErrorMessage);
+        }
+
+        if (response.Result is null)
         {
             return NotFound();
         }
 
-        return Ok(order);
+        return Ok(response.Result);
     }
 
     // POST api/<OrdersController>
@@ -69,17 +91,27 @@ public class OrdersController : ControllerBase
             return BadRequest("Order.Id parameter cannot be null.");
         }
 
-        var createdOrder = await _orderService.AddAsync(order);
+        var response = await _orderService.AddAsync(order);
 
-        if (createdOrder is null || createdOrder.Id == 0)
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        if (response.HasErrors)
+        {
+            return Ok(response.ErrorMessage);
+        }
+
+        if (response.Result is null)
         {
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
         return CreatedAtAction(
             actionName: nameof(GetByIdAsync),
-            routeValues: new { createdOrder.Id },
-            value: createdOrder);
+            routeValues: new { response.Result.Id },
+            value: response.Result);
     }
 
     // PUT api/<OrdersController>/5
@@ -91,12 +123,19 @@ public class OrdersController : ControllerBase
         if (id != order.Id)
             return BadRequest("Id field and Order.Id field do not match.");
 
-        var updatedCount = await _orderService.UpdateAsync(order);
+        var response = await _orderService.UpdateAsync(order);
 
-        if (updatedCount == 0)
-            return NotFound();
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
 
-        return Ok(updatedCount);
+        if (response.HasErrors)
+        {
+            return NotFound(response.ErrorMessage);
+        }
+
+        return Ok(response.Result);
     }
 
     // DELETE api/<OrdersController>/5
@@ -110,11 +149,18 @@ public class OrdersController : ControllerBase
             return BadRequest("Id parameter cannot be 0.");
         }
 
-        var deletedCount = await _orderService.DeleteAsync(id);
+        var response = await _orderService.DeleteAsync(id);
 
-        if (deletedCount == 0)
-            return NotFound();
+        if (response is null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
 
-        return Ok(deletedCount);
+        if (response.HasErrors)
+        {
+            return NotFound(response.ErrorMessage);
+        }
+
+        return Ok(response.Result);
     }
 }
