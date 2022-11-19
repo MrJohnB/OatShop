@@ -32,10 +32,4 @@ public static class ServiceExtensions
             // there's more than one under than interface, so you get a list of
             // objects in the same order that they were registered/mapped in.
     }
-
-    public static IServiceCollection AddClassWithoutInterface(this IServiceCollection services)
-    {
-        return services
-            .AddTransient<CustomerService>(); // Note: no interface!
-    }
 }

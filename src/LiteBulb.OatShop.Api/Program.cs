@@ -52,10 +52,9 @@ public static class Program
 
         app.UseHttpsRedirection();
         app.UseCors(options => options // Call to UseCors() must be placed after UseRouting, but before UseAuthorization
-    .AllowAnyOrigin()
-    .AllowAnyHeader()
-    .AllowAnyMethod());
-
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod());
 
         app.UseAuthorization();
 

@@ -28,9 +28,9 @@ public class FeeCalculationFactory : IFeeCalculationFactory
         switch (feeMethodType)
         {
             case FeeMethodType.A:
-                return services.FirstOrDefault();
+                return services.FirstOrDefault() ?? throw new NullReferenceException($"Service type was not found in factory method: '{nameof(GetFeeMethod)}'.");
             case FeeMethodType.B:
-                return services.LastOrDefault();
+                return services.LastOrDefault() ?? throw new NullReferenceException($"Service type was not found in factory method: '{nameof(GetFeeMethod)}'.");
             case FeeMethodType.None:
             default:
                 throw new NotSupportedException();
