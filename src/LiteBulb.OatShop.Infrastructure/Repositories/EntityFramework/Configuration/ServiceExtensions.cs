@@ -1,4 +1,5 @@
-﻿using LiteBulb.OatShop.ApplicationCore.Interfaces.Repositories.Data;
+﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
+using LiteBulb.OatShop.ApplicationCore.Interfaces.Repositories.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -28,9 +29,10 @@ public static class ServiceExtensions
     public static IServiceCollection AddRepositories(this IServiceCollection services)
     {
         return services
-            .AddScoped<ICustomerRepository, CustomerRepository>()
-            .AddScoped<IOrderItemRepository, OrderItemRepository>()
-            .AddScoped<IOrderRepository, OrderRepository>()
-            .AddScoped<IProductRepository, ProductRepository>();
+            .AddScoped<IRepository<Customer>, CustomerRepository>()
+            .AddScoped<IRepository<OrderItem>, OrderItemRepository>()
+            .AddScoped<IRepository<Order>, OrderRepository>()
+            .AddScoped<IRepository<Product>, ProductRepository>();
+            //.AddScoped<IRepository<Product>, CachedProductRepository>();
     }
 }

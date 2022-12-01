@@ -8,9 +8,9 @@ namespace LiteBulb.OatShop.ApplicationCore.Services.Data;
 public class CustomerService : ICustomerService
 {
     private readonly ILogger<CustomerService> _logger;
-    private readonly ICustomerRepository _customerRepository;
+    private readonly IRepository<Customer> _customerRepository;
 
-    public CustomerService(ILogger<CustomerService> logger, ICustomerRepository customerRepository)
+    public CustomerService(ILogger<CustomerService> logger, IRepository<Customer> customerRepository)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));

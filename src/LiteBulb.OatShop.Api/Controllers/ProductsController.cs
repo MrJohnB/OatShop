@@ -52,7 +52,7 @@ public class ProductsController : ControllerBase
 
         if (id == 0)
         {
-            return BadRequest("Id parameter cannot be 0.");
+            return BadRequest("Id parameter cannot be 0 for Get by Id.");
         }
 
         var response = await _productService.GetAsync(id);
@@ -83,12 +83,12 @@ public class ProductsController : ControllerBase
 
         if (product is null)
         {
-            return BadRequest("Product parameter cannot be null.");
+            return BadRequest("Product parameter cannot be null for Create.");
         }
 
         if (product.Id != 0)
         {
-            return BadRequest("Product.Id parameter cannot be null.");
+            return BadRequest("Order.Id property must be 0 for Create.");
         }
 
         var response = await _productService.AddAsync(product);
@@ -121,7 +121,7 @@ public class ProductsController : ControllerBase
         _logger.LogDebug($"Entering controller method: {nameof(UpdateAsync)}");
 
         if (id != product.Id)
-            return BadRequest("Id field and Product.Id field do not match.");
+            return BadRequest("Id parameter and Product.Id property must match for Update.");
 
         var response = await _productService.UpdateAsync(product);
 
@@ -146,7 +146,7 @@ public class ProductsController : ControllerBase
 
         if (id == 0)
         {
-            return BadRequest("Id parameter cannot be 0.");
+            return BadRequest("Id parameter cannot be 0 for Delete by Id.");
         }
 
         var response = await _productService.DeleteAsync(id);

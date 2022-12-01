@@ -52,7 +52,7 @@ public class CustomersController : ControllerBase
 
         if (id == 0)
         {
-            return BadRequest("Id parameter cannot be 0.");
+            return BadRequest("Id parameter cannot be 0 for Find by Id.");
         }
 
         var response = await _customerService.GetAsync(id);
@@ -83,12 +83,12 @@ public class CustomersController : ControllerBase
 
         if (customer is null)
         {
-            return BadRequest("Customer parameter cannot be null.");
+            return BadRequest("Customer parameter cannot be null for Create.");
         }
 
         if (customer.Id != 0)
         {
-            return BadRequest("Customer.Id parameter cannot be null.");
+            return BadRequest("Customer.Id property must be 0 for Create.");
         }
 
         var response = await _customerService.AddAsync(customer);
@@ -121,7 +121,7 @@ public class CustomersController : ControllerBase
         _logger.LogDebug($"Entering controller method: {nameof(UpdateAsync)}");
 
         if (id != customer.Id)
-            return BadRequest("Id field and Customer.Id field do not match.");
+            return BadRequest("Id parameter and Customer.Id property must match for Update.");
 
         var response = await _customerService.UpdateAsync(customer);
 
@@ -146,7 +146,7 @@ public class CustomersController : ControllerBase
 
         if (id == 0)
         {
-            return BadRequest("Id parameter cannot be 0.");
+            return BadRequest("Id parameter cannot be 0 for Delete by Id.");
         }
 
         var response = await _customerService.DeleteAsync(id);

@@ -3,15 +3,15 @@ using LiteBulb.OatShop.ApplicationCore.Interfaces.Repositories.Data;
 using Microsoft.Extensions.Logging;
 
 namespace LiteBulb.OatShop.Infrastructure.Repositories.Proxies;
-public class CachedProductRepository : ICachedProductRepository, IProductRepository
+public class CachedProductRepository : IRepository<Product>
 {
     private readonly ILogger<CachedProductRepository> _logger;
-    private readonly IProductRepository _productRepository;
+    private readonly IRepository<Product> _productRepository;
 
     private readonly IDictionary<int, Product> _products;
     //private static IDictionary<int, Product> Products = new Concurrent.ConcurrentDictionary<int, Product>();
 
-    public CachedProductRepository(ILogger<CachedProductRepository> logger, IProductRepository productRepository)
+    public CachedProductRepository(ILogger<CachedProductRepository> logger, IRepository<Product> productRepository)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));

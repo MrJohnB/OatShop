@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework;
-public class OrderRepository : IOrderRepository
+public class OrderRepository : IRepository<Order>
 {
     private readonly ILogger<OrderRepository> _logger;
     private readonly OatShopDbContext _dbContext;

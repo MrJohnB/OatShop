@@ -52,7 +52,7 @@ public class OrdersController : ControllerBase
 
         if (id == 0)
         {
-            return BadRequest("Id parameter cannot be 0.");
+            return BadRequest("Id parameter cannot be 0 for Get by Id.");
         }
 
         var response = await _orderService.GetAsync(id);
@@ -83,12 +83,12 @@ public class OrdersController : ControllerBase
 
         if (order is null)
         {
-            return BadRequest("Order parameter cannot be null.");
+            return BadRequest("Order parameter cannot be null for Create.");
         }
 
         if (order.Id != 0)
         {
-            return BadRequest("Order.Id parameter cannot be null.");
+            return BadRequest("Order.Id property must be 0 for Create.");
         }
 
         var response = await _orderService.AddAsync(order);
@@ -121,7 +121,7 @@ public class OrdersController : ControllerBase
         _logger.LogDebug($"Entering controller method: {nameof(UpdateAsync)}");
 
         if (id != order.Id)
-            return BadRequest("Id field and Order.Id field do not match.");
+            return BadRequest("Id parameter and Order.Id property must match for Update.");
 
         var response = await _orderService.UpdateAsync(order);
 
@@ -146,7 +146,7 @@ public class OrdersController : ControllerBase
 
         if (id == 0)
         {
-            return BadRequest("Id parameter cannot be 0.");
+            return BadRequest("Id parameter cannot be 0 for Delete by Id.");
         }
 
         var response = await _orderService.DeleteAsync(id);
