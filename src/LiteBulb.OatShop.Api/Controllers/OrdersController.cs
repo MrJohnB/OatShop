@@ -10,9 +10,9 @@ public class OrdersController : ControllerBase
     // TODO: do mapping from Model to DTO in controller?
 
     private readonly ILogger<OrdersController> _logger;
-    private readonly IOrderService _orderService;
+    private readonly IService<Order> _orderService;
 
-    public OrdersController(ILogger<OrdersController> logger, IOrderService orderService)
+    public OrdersController(ILogger<OrdersController> logger, IService<Order> orderService)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _orderService = orderService ?? throw new ArgumentNullException(nameof(orderService));
@@ -100,7 +100,7 @@ public class OrdersController : ControllerBase
 
         if (response.HasErrors)
         {
-            return Ok(response.ErrorMessage);
+            return StatusCode(StatusCodes.Status500InternalServerError, response.ErrorMessage);
         }
 
         if (response.Result is null)

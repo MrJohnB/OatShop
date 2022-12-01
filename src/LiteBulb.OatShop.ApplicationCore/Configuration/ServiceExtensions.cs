@@ -1,4 +1,5 @@
-﻿using LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Data;
+﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
+using LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Data;
 using LiteBulb.OatShop.ApplicationCore.Interfaces.Services.FeeCalculation;
 using LiteBulb.OatShop.ApplicationCore.Services.Data;
 using LiteBulb.OatShop.ApplicationCore.Services.FeeCalculation;
@@ -10,10 +11,9 @@ public static class ServiceExtensions
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
         return services
-            .AddScoped<ICustomerService, CustomerService>()
-            .AddScoped<IOrderService, OrderService>()
-            .AddScoped<IProductService, ProductService>();
-            // AddSingleton<IProductService, CachedProductService>();
+            .AddScoped<IService<Customer>, CustomerService>()
+            .AddScoped<IService<Order>, OrderService>()
+            .AddScoped<IService<Product>, ProductService>();
     }
 
     /// <summary>

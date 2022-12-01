@@ -5,7 +5,7 @@ using LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Data;
 using Microsoft.Extensions.Logging;
 
 namespace LiteBulb.OatShop.ApplicationCore.Services.Data;
-public class ProductService : IProductService
+public class ProductService : IService<Product>
 {
     private readonly ILogger<ProductService> _logger;
     private readonly IRepository<Product> _productRepository;

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 
 namespace LiteBulb.OatShop.ApplicationCore.Services.Data;
-public class OrderService : IOrderService
+public class OrderService : IService<Order>
 {
     private readonly ILogger<OrderService> _logger;
     private readonly IRepository<Order> _orderRepository;
