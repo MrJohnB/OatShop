@@ -1,4 +1,4 @@
-﻿namespace LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Responses;
+﻿namespace LiteBulb.OatShop.SharedKernel.Services.Data;
 /// <summary>
 /// The response object from a service (for void return type service methods).
 /// </summary>

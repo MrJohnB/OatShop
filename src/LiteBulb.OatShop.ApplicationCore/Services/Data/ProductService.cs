@@ -1,7 +1,6 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
-using LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Responses;
-using LiteBulb.OatShop.ApplicationCore.Interfaces.Repositories.Data;
-using LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Data;
+using LiteBulb.OatShop.SharedKernel.Repositories;
+using LiteBulb.OatShop.SharedKernel.Services.Data;
 using Microsoft.Extensions.Logging;
 
 namespace LiteBulb.OatShop.ApplicationCore.Services.Data;

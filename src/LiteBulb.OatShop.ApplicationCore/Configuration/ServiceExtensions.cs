@@ -1,8 +1,7 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
-using LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Data;
-using LiteBulb.OatShop.ApplicationCore.Interfaces.Services.FeeCalculation;
 using LiteBulb.OatShop.ApplicationCore.Services.Data;
 using LiteBulb.OatShop.ApplicationCore.Services.FeeCalculation;
+using LiteBulb.OatShop.SharedKernel.Services.Data;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LiteBulb.OatShop.ApplicationCore.Configuration;

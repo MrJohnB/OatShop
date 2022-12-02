@@ -1,4 +1,4 @@
-﻿namespace LiteBulb.OatShop.ApplicationCore.Interfaces.Repositories.Data;
+﻿namespace LiteBulb.OatShop.SharedKernel.Repositories;
 public interface IRepository<T>
 {
     Task<ICollection<T>> GetAsync();

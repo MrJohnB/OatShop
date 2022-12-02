@@ -1,7 +1,7 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
 using LiteBulb.OatShop.SharedKernel.Mappers;
 
-namespace LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Mappers;
+namespace LiteBulb.OatShop.Infrastructure.Mappers;
 public class ProductMapper : IMapper<Entities.Product, Product>
 {
     public Product ToModel(Entities.Product entity)
@@ -26,7 +26,7 @@ public class ProductMapper : IMapper<Entities.Product, Product>
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
         var dtos = new List<Product>();
-        
+
         foreach (var entity in entities)
         {
             dtos.Add(ToModel(entity));

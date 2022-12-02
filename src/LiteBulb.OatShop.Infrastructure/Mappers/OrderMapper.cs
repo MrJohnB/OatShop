@@ -1,7 +1,7 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
 using LiteBulb.OatShop.SharedKernel.Mappers;
 
-namespace LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Mappers;
+namespace LiteBulb.OatShop.Infrastructure.Mappers;
 public class OrderMapper : IMapper<Entities.Order, Order>
 {
     private readonly IMapper<Entities.OrderItem, OrderItem> _orderItemMapper;

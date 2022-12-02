@@ -1,6 +1,4 @@
-﻿using LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Responses;
-
-namespace LiteBulb.OatShop.ApplicationCore.Interfaces.Services.Data;
+﻿namespace LiteBulb.OatShop.SharedKernel.Services.Data;
 public interface IService<T>
 {
     Task<ServiceResponse<ICollection<T>>> GetAsync();

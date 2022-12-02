@@ -1,7 +1,7 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
-using LiteBulb.OatShop.ApplicationCore.Interfaces.Repositories.Data;
-using LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Mappers;
+using LiteBulb.OatShop.Infrastructure.Mappers;
 using LiteBulb.OatShop.SharedKernel.Mappers;
+using LiteBulb.OatShop.SharedKernel.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
