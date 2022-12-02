@@ -1,5 +1,7 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
 using LiteBulb.OatShop.ApplicationCore.Interfaces.Repositories.Data;
+using LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Mappers;
+using LiteBulb.OatShop.SharedKernel.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -24,6 +26,15 @@ public static class ServiceExtensions
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors()
             );
+    }
+
+    public static IServiceCollection AddMappers(this IServiceCollection services)
+    {
+        return services
+            .AddSingleton<IMapper<Entities.Customer, Customer>, CustomerMapper>()
+            .AddSingleton<IMapper<Entities.OrderItem, OrderItem>, OrderItemMapper>()
+            .AddSingleton<IMapper<Entities.Order, Order>, OrderMapper>()
+            .AddSingleton<IMapper<Entities.Product, Product>, ProductMapper>();
     }
 
     public static IServiceCollection AddRepositories(this IServiceCollection services)

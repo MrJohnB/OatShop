@@ -14,10 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LiteBulb.OatShop.ApplicationCore\LiteBulb.OatShop.ApplicationCore.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositories\EntityFramework\Abstract\" />
+    <ProjectReference Include="..\LiteBulb.OatShop.SharedKernel\LiteBulb.OatShop.SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>

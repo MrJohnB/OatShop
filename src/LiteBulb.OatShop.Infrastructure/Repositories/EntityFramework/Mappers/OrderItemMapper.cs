@@ -1,9 +1,17 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
+using LiteBulb.OatShop.SharedKernel.Mappers;
 
 namespace LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Mappers;
-internal static class OrderItemMapper
+public class OrderItemMapper : IMapper<Entities.OrderItem, OrderItem>
 {
-    internal static OrderItem Map(this Entities.OrderItem entity)
+    private readonly IMapper<Entities.Product, Product> _productMapper;
+
+    public OrderItemMapper(IMapper<Entities.Product, Product> productMapper)
+    {
+        _productMapper = productMapper ?? throw new ArgumentNullException(nameof(productMapper));
+    }
+
+    public OrderItem ToModel(Entities.OrderItem entity)
     {
         ArgumentNullException.ThrowIfNull(entity, nameof(entity));
 
@@ -11,7 +19,7 @@ internal static class OrderItemMapper
         {
             Id = entity.Id,
             OrderId = entity.OrderId,
-            Product = entity.Product?.Map(),
+            Product = _productMapper.ToModel(entity.Product), // TODO: should OrderItem.ProductId (FK) be nullable?
             Name = entity.Name,
             OriginalPrice = entity.OriginalPrice,
             Discount = entity.Discount,
@@ -20,7 +28,7 @@ internal static class OrderItemMapper
         };
     }
 
-    internal static ICollection<OrderItem> MapMany(this ICollection<Entities.OrderItem> entities)
+    public ICollection<OrderItem> ToModel(ICollection<Entities.OrderItem> entities)
     {
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
@@ -28,38 +36,38 @@ internal static class OrderItemMapper
 
         foreach (var entity in entities)
         {
-            dtos.Add(Map(entity));
+            dtos.Add(ToModel(entity));
         }
 
         return dtos;
     }
 
-    internal static Entities.OrderItem Map(this OrderItem dto)
+    public Entities.OrderItem ToEntity(OrderItem model)
     {
-        ArgumentNullException.ThrowIfNull(dto, nameof(dto));
+        ArgumentNullException.ThrowIfNull(model, nameof(model));
 
         return new Entities.OrderItem()
         {
-            Id = dto.Id,
-            OrderId = dto.OrderId,
-            Product = dto.Product?.Map(),
-            Name = dto.Name,
-            OriginalPrice = dto.OriginalPrice,
-            Discount = dto.Discount,
-            Created = dto.Created,
-            Updated = dto.Updated
+            Id = model.Id,
+            OrderId = model.OrderId,
+            Product = _productMapper.ToEntity(model.Product), // TODO: should OrderItem.Product be nullable?
+            Name = model.Name,
+            OriginalPrice = model.OriginalPrice,
+            Discount = model.Discount,
+            Created = model.Created,
+            Updated = model.Updated
         };
     }
 
-    internal static ICollection<Entities.OrderItem> MapMany(this ICollection<OrderItem> dtos)
+    public ICollection<Entities.OrderItem> ToEntity(ICollection<OrderItem> models)
     {
-        ArgumentNullException.ThrowIfNull(dtos, nameof(dtos));
+        ArgumentNullException.ThrowIfNull(models, nameof(models));
 
         var entities = new List<Entities.OrderItem>();
 
-        foreach (var dto in dtos)
+        foreach (var model in models)
         {
-            entities.Add(Map(dto));
+            entities.Add(ToEntity(model));
         }
 
         return entities;

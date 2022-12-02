@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
+using LiteBulb.OatShop.SharedKernel.Entities;
 
 namespace LiteBulb.OatShop.Infrastructure.Entities;
-public class Customer
+public class Customer : Entity, IEntity<int>
 {
     public int Id { get; set; }
     public string FirstName { get; set; } = string.Empty;
@@ -17,6 +18,4 @@ public class Customer
     public string County { get; set; } = string.Empty;
     public string Country { get; set; } = string.Empty;
     public virtual ICollection<Order> Orders { get; set; } = new Collection<Order>();
-    public DateTime Created { get; set; }
-    public DateTime Updated { get; set; }
 }

@@ -1,9 +1,17 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
+using LiteBulb.OatShop.SharedKernel.Mappers;
 
 namespace LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Mappers;
-internal static class CustomerMapper
+public class CustomerMapper : IMapper<Entities.Customer, Customer>
 {
-    internal static Customer Map(this Entities.Customer entity)
+    private readonly IMapper<Entities.Order, Order> _orderMapper;
+
+    public CustomerMapper(IMapper<Entities.Order, Order> orderMapper)
+    {
+        _orderMapper = orderMapper ?? throw new ArgumentNullException(nameof(orderMapper));
+    }
+
+    public Customer ToModel(Entities.Customer entity)
     {
         ArgumentNullException.ThrowIfNull(entity, nameof(entity));
 
@@ -22,13 +30,13 @@ internal static class CustomerMapper
             State = entity.State,
             County = entity.County,
             Country = entity.Country,
-            Orders = entity.Orders.MapMany(),
+            Orders = _orderMapper.ToModel(entity.Orders),
             Created = entity.Created,
             Updated = entity.Updated
         };
     }
 
-    internal static ICollection<Customer> MapMany(this ICollection<Entities.Customer> entities)
+    public ICollection<Customer> ToModel(ICollection<Entities.Customer> entities)
     {
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
@@ -36,46 +44,46 @@ internal static class CustomerMapper
 
         foreach (var entity in entities)
         {
-            dtos.Add(Map(entity));
+            dtos.Add(ToModel(entity));
         }
 
         return dtos;
     }
 
-    internal static Entities.Customer Map(this Customer dto)
+    public Entities.Customer ToEntity(Customer model)
     {
-        ArgumentNullException.ThrowIfNull(dto, nameof(dto));
+        ArgumentNullException.ThrowIfNull(model, nameof(model));
 
         return new Entities.Customer()
         {
-            Id = dto.Id,
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
-            MobilePhone = dto.MobilePhone,
-            Email = dto.Email,
-            Line1 = dto.Line1,
-            Line2 = dto.Line2,
-            Line3 = dto.Line3,
-            City = dto.City,
-            ZipCode = dto.ZipCode,
-            State = dto.State,
-            County = dto.County,
-            Country = dto.Country,
-            Orders = dto.Orders.MapMany(),
-            Created = dto.Created,
-            Updated = dto.Updated
+            Id = model.Id,
+            FirstName = model.FirstName,
+            LastName = model.LastName,
+            MobilePhone = model.MobilePhone,
+            Email = model.Email,
+            Line1 = model.Line1,
+            Line2 = model.Line2,
+            Line3 = model.Line3,
+            City = model.City,
+            ZipCode = model.ZipCode,
+            State = model.State,
+            County = model.County,
+            Country = model.Country,
+            Orders = _orderMapper.ToEntity(model.Orders),
+            Created = model.Created,
+            Updated = model.Updated
         };
     }
 
-    internal static ICollection<Entities.Customer> MapMany(this ICollection<Customer> dtos)
+    public ICollection<Entities.Customer> ToEntity(ICollection<Customer> models)
     {
-        ArgumentNullException.ThrowIfNull(dtos, nameof(dtos));
+        ArgumentNullException.ThrowIfNull(models, nameof(models));
 
         var entities = new List<Entities.Customer>();
 
-        foreach (var dto in dtos)
+        foreach (var model in models)
         {
-            entities.Add(Map(dto));
+            entities.Add(ToEntity(model));
         }
 
         return entities;

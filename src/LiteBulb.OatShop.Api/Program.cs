@@ -26,6 +26,7 @@ public static class Program
         builder.Services.AddApplicationDbContext(connectionString);
 
         // Add custom service registrations
+        builder.Services.AddMappers();
         builder.Services.AddRepositories();
         builder.Services.AddServices();
 

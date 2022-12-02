@@ -19,9 +19,9 @@ public class CachedProductRepository : IRepository<Product>
         _products = new Dictionary<int, Product>();
     }
 
-    public async Task<Product> AddAsync(Product dto)
+    public async Task<Product> AddAsync(Product model)
     {
-        var product = await _productRepository.AddAsync(dto);
+        var product = await _productRepository.AddAsync(model);
         _products.TryAdd(product.Id, product);
         return product;
     }
@@ -47,13 +47,13 @@ public class CachedProductRepository : IRepository<Product>
         return _productRepository.GetAsync(id);
     }
 
-    public Task<int?> UpdateAsync(Product dto)
+    public Task<int?> UpdateAsync(Product model)
     {
-        if (_products.ContainsKey(dto.Id))
+        if (_products.ContainsKey(model.Id))
         {
-            _products[dto.Id] = dto;
+            _products[model.Id] = model;
         }
 
-        return _productRepository.UpdateAsync(dto);
+        return _productRepository.UpdateAsync(model);
     }
 }

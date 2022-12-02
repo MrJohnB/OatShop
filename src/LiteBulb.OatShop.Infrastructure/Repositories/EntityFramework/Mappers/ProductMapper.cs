@@ -1,9 +1,10 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
+using LiteBulb.OatShop.SharedKernel.Mappers;
 
 namespace LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Mappers;
-internal static class ProductMapper
+public class ProductMapper : IMapper<Entities.Product, Product>
 {
-    internal static Product Map(this Entities.Product entity)
+    public Product ToModel(Entities.Product entity)
     {
         ArgumentNullException.ThrowIfNull(entity, nameof(entity));
 
@@ -20,7 +21,7 @@ internal static class ProductMapper
         };
     }
 
-    internal static ICollection<Product> MapMany(this ICollection<Entities.Product> entities)
+    public ICollection<Product> ToModel(ICollection<Entities.Product> entities)
     {
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
@@ -28,38 +29,38 @@ internal static class ProductMapper
         
         foreach (var entity in entities)
         {
-            dtos.Add(Map(entity));
+            dtos.Add(ToModel(entity));
         }
 
         return dtos;
     }
 
-    internal static Entities.Product Map(this Product dto)
+    public Entities.Product ToEntity(Product model)
     {
-        ArgumentNullException.ThrowIfNull(dto, nameof(dto));
+        ArgumentNullException.ThrowIfNull(model, nameof(model));
 
         return new Entities.Product()
         {
-            Id = dto.Id,
-            Name = dto.Name,
-            Description = dto.Description,
-            Category = dto.Category,
-            OriginalPrice = dto.OriginalPrice,
-            Discount = dto.Discount,
-            Created = dto.Created,
-            Updated = dto.Updated
+            Id = model.Id,
+            Name = model.Name,
+            Description = model.Description,
+            Category = model.Category,
+            OriginalPrice = model.OriginalPrice,
+            Discount = model.Discount,
+            Created = model.Created,
+            Updated = model.Updated
         };
     }
 
-    internal static ICollection<Entities.Product> MapMany(this ICollection<Product> dtos)
+    public ICollection<Entities.Product> ToEntity(ICollection<Product> models)
     {
-        ArgumentNullException.ThrowIfNull(dtos, nameof(dtos));
+        ArgumentNullException.ThrowIfNull(models, nameof(models));
 
         var entities = new List<Entities.Product>();
 
-        foreach (var dto in dtos)
+        foreach (var model in models)
         {
-            entities.Add(Map(dto));
+            entities.Add(ToEntity(model));
         }
 
         return entities;

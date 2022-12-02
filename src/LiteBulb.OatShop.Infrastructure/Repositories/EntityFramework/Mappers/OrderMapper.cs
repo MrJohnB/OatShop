@@ -1,9 +1,17 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
+using LiteBulb.OatShop.SharedKernel.Mappers;
 
 namespace LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Mappers;
-internal static class OrderMapper
+public class OrderMapper : IMapper<Entities.Order, Order>
 {
-    internal static Order Map(this Entities.Order entity)
+    private readonly IMapper<Entities.OrderItem, OrderItem> _orderItemMapper;
+
+    public OrderMapper(IMapper<Entities.OrderItem, OrderItem> orderItemMapper)
+    {
+        _orderItemMapper = orderItemMapper ?? throw new ArgumentNullException(nameof(orderItemMapper));
+    }
+
+    public Order ToModel(Entities.Order entity)
     {
         ArgumentNullException.ThrowIfNull(entity, nameof(entity));
 
@@ -14,13 +22,13 @@ internal static class OrderMapper
             CustomerId = entity.CustomerId,
             OrderStatus = entity.OrderStatus,
             Discount = entity.Discount,
-            OrderItems = entity.OrderItems.MapMany(),
+            OrderItems = _orderItemMapper.ToModel(entity.OrderItems),
             Created = entity.Created,
             Updated = entity.Updated
         };
     }
 
-    internal static ICollection<Order> MapMany(this ICollection<Entities.Order> entities)
+    public ICollection<Order> ToModel(ICollection<Entities.Order> entities)
     {
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
@@ -28,38 +36,38 @@ internal static class OrderMapper
 
         foreach (var entity in entities)
         {
-            dtos.Add(Map(entity));
+            dtos.Add(ToModel(entity));
         }
 
         return dtos;
     }
 
-    internal static Entities.Order Map(this Order dto)
+    public Entities.Order ToEntity(Order model)
     {
-        ArgumentNullException.ThrowIfNull(dto, nameof(dto));
+        ArgumentNullException.ThrowIfNull(model, nameof(model));
 
         return new Entities.Order()
         {
-            Id = dto.Id,
-            CompanyId = dto.CompanyId,
-            CustomerId = dto.CustomerId,
-            OrderStatus = dto.OrderStatus,
-            Discount = dto.Discount,
-            OrderItems = dto.OrderItems.MapMany(),
-            Created = dto.Created,
-            Updated = dto.Updated
+            Id = model.Id,
+            CompanyId = model.CompanyId,
+            CustomerId = model.CustomerId,
+            OrderStatus = model.OrderStatus,
+            Discount = model.Discount,
+            OrderItems = _orderItemMapper.ToEntity(model.OrderItems),
+            Created = model.Created,
+            Updated = model.Updated
         };
     }
 
-    internal static ICollection<Entities.Order> MapMany(this ICollection<Order> dtos)
+    public ICollection<Entities.Order> ToEntity(ICollection<Order> models)
     {
-        ArgumentNullException.ThrowIfNull(dtos, nameof(dtos));
+        ArgumentNullException.ThrowIfNull(models, nameof(models));
 
         var entities = new List<Entities.Order>();
 
-        foreach (var dto in dtos)
+        foreach (var model in models)
         {
-            entities.Add(Map(dto));
+            entities.Add(ToEntity(model));
         }
 
         return entities;

@@ -1,5 +1,7 @@
-﻿namespace LiteBulb.OatShop.Infrastructure.Entities;
-public class Product
+﻿using LiteBulb.OatShop.SharedKernel.Entities;
+
+namespace LiteBulb.OatShop.Infrastructure.Entities;
+public class Product : Entity, IEntity<int>
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
@@ -7,6 +9,4 @@ public class Product
     public string Category { get; set; } = string.Empty;
     public decimal OriginalPrice { get; set; }
     public decimal Discount { get; set; }
-    public DateTime Created { get; set; }
-    public DateTime Updated { get; set; }
 }
