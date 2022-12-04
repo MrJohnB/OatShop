@@ -3,7 +3,7 @@ using LiteBulb.OatShop.SharedKernel.Services.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiteBulb.OatShop.Api.Controllers;
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 [ApiController]
 public class OrdersController : ControllerBase
 {
@@ -18,8 +18,18 @@ public class OrdersController : ControllerBase
         _orderService = orderService ?? throw new ArgumentNullException(nameof(orderService));
     }
 
-    // GET: api/<OrdersController>
+    /// <summary>
+    /// Get list of all Order objects from the database.
+    /// </summary>
+    /// <remarks>Returns 404 Not Found if list is empty</remarks>
+    /// <example>GET api/v1/Orders</example>
+    /// <response code="200" cref="Order">Retrieved list of objects</response>
+    /// <response code="404">Not Found</response>
+    /// <response code="500">Internal Server Error</response>
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Order))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetAllAsync()
     {
         _logger.LogDebug($"Entering controller method: {nameof(GetAllAsync)}");
@@ -44,8 +54,20 @@ public class OrdersController : ControllerBase
         return Ok(response.Result);
     }
 
-    // GET api/<OrdersController>/5
+    /// <summary>
+    /// Get a Order object by id field from database.
+    /// </summary>
+    /// <example>GET api/v1/Orders/5</example>
+    /// <param name="id">Id of the Order to retreive</param>
+    /// <response code="200" cref="Order">Retrieved object</response>
+    /// <response code="400">Bad Request</response>
+    /// <response code="404">Not Found</response>
+    /// <response code="500">Internal Server Error</response>
     [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Order))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetByIdAsync(int id)
     {
         _logger.LogDebug($"Entering controller method: {nameof(GetByIdAsync)}");
@@ -75,8 +97,19 @@ public class OrdersController : ControllerBase
         return Ok(response.Result);
     }
 
-    // POST api/<OrdersController>
+    /// <summary>
+    /// Add a new Order object to database.
+    /// </summary>
+    /// <remarks>Id field must be null or 0.</remarks>
+    /// <example>POST api/Orders</example>
+    /// <param name="order">Order object to add (JSON)</param>
+    /// <response code="201" cref="Order">Created object</response>
+    /// <response code="400">Bad Request</response>
+    /// <response code="500">Internal Server Error</response>
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Order))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> CreateAsync([FromBody] Order order)
     {
         _logger.LogDebug($"Entering controller method: {nameof(CreateAsync)}");
@@ -114,8 +147,22 @@ public class OrdersController : ControllerBase
             value: response.Result);
     }
 
-    // PUT api/<OrdersController>/5
+    /// <summary>
+    /// Update a Order object in the database.
+    /// </summary>
+    /// <remarks>The id value in the route must match the Id field in the supplied Order object</remarks>
+    /// <example>PUT api/Orders/5</example>
+    /// <param name="id">Id of the object to update</param>
+    /// <param name="order">Order object to update (JSON)</param>
+    /// <response code="200">Number of updated objects</response>
+    /// <response code="400">Bad Request</response>
+    /// <response code="404">Not Found</response>
+    /// <response code="500">Internal Server Error</response>
     [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> UpdateAsync(int id, [FromBody] Order order)
     {
         _logger.LogDebug($"Entering controller method: {nameof(UpdateAsync)}");
@@ -138,8 +185,20 @@ public class OrdersController : ControllerBase
         return Ok(response.Result);
     }
 
-    // DELETE api/<OrdersController>/5
+    /// <summary>
+    /// Delete a Order object from the database.
+    /// </summary>
+    /// <example>DELETE api/Orders/5</example>
+    /// <param name="id">Id of the object to delete</param>
+    /// <response code="200">Number of deleted objects</response>
+    /// <response code="400">Bad Request</response>
+    /// <response code="404">Not Found</response>
+    /// <response code="500">Internal Server Error</response>
     [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> DeleteByIdAsync(int id)
     {
         _logger.LogDebug($"Entering controller method: {nameof(DeleteByIdAsync)}");

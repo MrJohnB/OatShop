@@ -1,5 +1,6 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Configuration;
 using LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Configuration;
+using Microsoft.OpenApi.Models;
 using Serilog;
 
 namespace LiteBulb.OatShop.Api;
@@ -32,7 +33,19 @@ public static class Program
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(options =>
+        {
+            options.SwaggerDoc("v1",
+                new OpenApiInfo
+                {
+                    Title = "OatShop API",
+                    Version = "v1",
+                    Description = "RESTful endpoints to be consumed by OatShop"
+                });
+
+            var filePath = Path.Combine(AppContext.BaseDirectory, "LiteBulb.OatShop.Api.xml");
+            options.IncludeXmlComments(filePath);
+        });
 
         // Logging
         builder.Host.UseSerilog((context, configuration) =>
