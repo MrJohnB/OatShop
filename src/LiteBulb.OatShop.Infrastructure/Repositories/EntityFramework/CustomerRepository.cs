@@ -1,12 +1,11 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
 using LiteBulb.OatShop.SharedKernel.Mappers;
-using LiteBulb.OatShop.SharedKernel.Repositories;
 using LiteBulb.OatShop.SharedKernel.Repositories.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework;
-public class CustomerRepository : Repository<Entities.Customer, Customer>, IRepository<Customer>
+public class CustomerRepository : Repository<Entities.Customer, Customer>
 {
     public CustomerRepository(ILogger<CustomerRepository> logger, OatShopDbContext dbContext, IMapper<Entities.Customer, Customer> mapper)
         : base(logger, dbContext, mapper) { }
