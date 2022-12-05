@@ -1,9 +1,6 @@
-﻿using LiteBulb.OatShop.SharedKernel.Entities;
-
-namespace LiteBulb.OatShop.Infrastructure.Entities;
-public class OrderItem : Entity, IEntity<int>
+﻿namespace LiteBulb.OatShop.Infrastructure.Entities;
+public class OrderItem : Entity
 {
-    public int Id { get; set; }
     public int OrderId { get; set; }
     //public int ProductId { get; set; }
     public virtual Product? Product { get; set; } // TODO: should OrderItem.ProductId (FK) be nullable?

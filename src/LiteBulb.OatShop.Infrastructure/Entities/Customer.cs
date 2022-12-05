@@ -1,10 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using LiteBulb.OatShop.SharedKernel.Entities;
 
 namespace LiteBulb.OatShop.Infrastructure.Entities;
-public class Customer : Entity, IEntity<int>
+public class Customer : Entity
 {
-    public int Id { get; set; }
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
     public string MobilePhone { get; set; } = string.Empty;

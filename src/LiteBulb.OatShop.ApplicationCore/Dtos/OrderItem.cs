@@ -1,10 +1,8 @@
 ﻿using LiteBulb.OatShop.ApplicationCore.Extensions;
-using LiteBulb.OatShop.SharedKernel.Entities;
 
 namespace LiteBulb.OatShop.ApplicationCore.Dtos;
-public class OrderItem : Entity, IEntity<int>
+public class OrderItem : Dto
 {
-    public int Id { get; set; }
     public int OrderId { get; set; }
     public Product? Product { get; set; }
     public string Name { get; set; } = string.Empty;

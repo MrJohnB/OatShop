@@ -1,11 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using LiteBulb.OatShop.ApplicationCore.Enumerations;
-using LiteBulb.OatShop.SharedKernel.Entities;
 
 namespace LiteBulb.OatShop.Infrastructure.Entities;
-public class Order : Entity, IEntity<int>
+public class Order : Entity
 {
-    public int Id { get; set; }
     public int CompanyId { get; set; }
     public int CustomerId { get; set; }
     public OrderStatus OrderStatus { get; set; }
