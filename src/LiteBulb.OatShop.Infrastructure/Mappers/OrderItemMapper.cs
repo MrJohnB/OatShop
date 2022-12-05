@@ -32,14 +32,14 @@ public class OrderItemMapper : IMapper<Entities.OrderItem, OrderItem>
     {
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
-        var dtos = new List<OrderItem>();
+        var models = new List<OrderItem>();
 
         foreach (var entity in entities)
         {
-            dtos.Add(ToModel(entity));
+            models.Add(ToModel(entity));
         }
 
-        return dtos;
+        return models;
     }
 
     public Entities.OrderItem ToEntity(OrderItem model)

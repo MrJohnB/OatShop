@@ -25,14 +25,14 @@ public class ProductMapper : IMapper<Entities.Product, Product>
     {
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
-        var dtos = new List<Product>();
+        var models = new List<Product>();
 
         foreach (var entity in entities)
         {
-            dtos.Add(ToModel(entity));
+            models.Add(ToModel(entity));
         }
 
-        return dtos;
+        return models;
     }
 
     public Entities.Product ToEntity(Product model)

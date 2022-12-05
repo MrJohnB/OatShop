@@ -40,14 +40,14 @@ public class CustomerMapper : IMapper<Entities.Customer, Customer>
     {
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
-        var dtos = new List<Customer>();
+        var models = new List<Customer>();
 
         foreach (var entity in entities)
         {
-            dtos.Add(ToModel(entity));
+            models.Add(ToModel(entity));
         }
 
-        return dtos;
+        return models;
     }
 
     public Entities.Customer ToEntity(Customer model)
