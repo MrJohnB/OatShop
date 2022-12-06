@@ -1,9 +1,10 @@
 ﻿using LiteBulb.OatShop.Shared.Entities;
 using LiteBulb.OatShop.Shared.Mappers;
+using LiteBulb.OatShop.Shared.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace LiteBulb.OatShop.Shared.Repositories.EntityFramework;
+namespace LiteBulb.OatShop.Infrastructure.Shared.Repositories.EntityFramework;
 public abstract class Repository<TEntity, TModel> : IRepository<TModel>
     where TEntity : class, IEntity<int>
     where TModel : class, IEntity<int>

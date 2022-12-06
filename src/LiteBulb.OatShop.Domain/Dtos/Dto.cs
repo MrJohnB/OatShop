@@ -1,9 +1,7 @@
 ﻿using LiteBulb.OatShop.Shared.Entities;
 
-namespace LiteBulb.OatShop.Domain.Dtos
+namespace LiteBulb.OatShop.Domain.Dtos;
+public abstract class Dto : Auditable, IEntity<int>
 {
-    public abstract class Dto : Auditable, IEntity<int>
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }

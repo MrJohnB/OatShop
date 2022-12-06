@@ -1,6 +1,6 @@
 ﻿using LiteBulb.OatShop.Domain.Dtos;
+using LiteBulb.OatShop.Infrastructure.Shared.Repositories.EntityFramework;
 using LiteBulb.OatShop.Shared.Mappers;
-using LiteBulb.OatShop.Shared.Repositories.EntityFramework;
 using Microsoft.Extensions.Logging;
 
 namespace LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework;

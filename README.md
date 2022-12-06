@@ -15,13 +15,14 @@ The solution is comprised of 4 client components:
 # Tech Stack
 
 1. .NET 6.0 (for Web API, Blazor WebAssembly, Blazor Server and libraries)
-2. .NET Standard 2.1 (for libraries)
-3.  Entity Framework Core 6.0 (for ORM)
-4. MySQL 8.0 (for database)
-5. Swagger (API documentation)
-6. Serilog (logging)
-7. Azure (for cloud hosting)
-8. MSTest2 (for unit & integration testing)
+2.  Entity Framework Core 6.0 (for ORM)
+3. MySQL 8.0 (for database)
+4. Swagger (API documentation)
+5. Serilog (logging)
+6. Azure (for cloud hosting)
+7. MSTest2 (for unit & integration testing)
+
+_Note: no .NET Standard 2.1 or .NET Standard 2.0._
 
 # Problem Statement
 
@@ -41,19 +42,22 @@ src\
     LiteBulb.OatShop.Web (Blazor WASM SPA)
     LiteBulb.OatShop.WebAdmin (Blazor Server SPA)
     LiteBulb.OatShop.Api (ASP.NET WebAPI REST)
-    LiteBulb.OatShop.Application (Business logic, DTOs)
-    LiteBulb.OatShop.Shared (Project to share common code between repos - could become NuGet package)
-    LiteBulb.OatShop.Infrastructure (Database and external services)
+	LiteBulb.OatShop.Domain (DTOs, enumerations, DTO extension methods)
+    LiteBulb.OatShop.Application (Business logic)
+    LiteBulb.OatShop.Infrastructure (Entities, database and external services)
     LiteBulb.OatShop.Infrastructure.Migrations (Strictly for EF Core migrations)
+	LiteBulb.OatShop.Shared (Project to share common code between repos - could become NuGet package)
+	LiteBulb.OatShop.Infrastructure.Shared (Project to share common code between repos - could become NuGet package)
 
 test\
 
-    LiteBulb.OatShop.Application.Tests (Unit & Integration tests)
-    LiteBulb.OatShop.Shared.Tests (Unit & Integration tests)
+    LiteBulb.OatShop.Domain.Tests (Unit tests)
+	LiteBulb.OatShop.Application.Tests (Unit & Integration tests)
     LiteBulb.OatShop.Infrastructure.Tests (Unit & Integration tests)
+	LiteBulb.OatShop.Shared.Tests (Unit tests)
 ```
 
-Note: See below for links to code repositories.
+_Note: See below for links to code repositories._
 
 # GitHub
 
