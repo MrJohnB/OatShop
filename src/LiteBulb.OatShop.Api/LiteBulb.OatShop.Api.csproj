@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LiteBulb.OatShop.Application\LiteBulb.OatShop.Application.csproj" />
     <ProjectReference Include="..\LiteBulb.OatShop.Infrastructure\LiteBulb.OatShop.Infrastructure.csproj" />
   </ItemGroup>
 

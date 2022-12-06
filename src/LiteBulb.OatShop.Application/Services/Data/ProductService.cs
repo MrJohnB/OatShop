@@ -1,4 +1,4 @@
-﻿using LiteBulb.OatShop.Application.Dtos;
+﻿using LiteBulb.OatShop.Domain.Dtos;
 using LiteBulb.OatShop.Shared.Repositories;
 using LiteBulb.OatShop.Shared.Services.Data;
 using Microsoft.Extensions.Logging;
