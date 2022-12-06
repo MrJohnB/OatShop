@@ -1,4 +1,4 @@
-﻿using LiteBulb.OatShop.ApplicationCore.Configuration;
+﻿using LiteBulb.OatShop.Application.Configuration;
 using LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework.Configuration;
 using Microsoft.OpenApi.Models;
 using Serilog;

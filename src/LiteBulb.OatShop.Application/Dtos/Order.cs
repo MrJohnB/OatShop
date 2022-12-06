@@ -1,7 +1,7 @@
-﻿using LiteBulb.OatShop.ApplicationCore.Enumerations;
-using LiteBulb.OatShop.ApplicationCore.Extensions;
+﻿using LiteBulb.OatShop.Application.Enumerations;
+using LiteBulb.OatShop.Application.Extensions;
 
-namespace LiteBulb.OatShop.ApplicationCore.Dtos;
+namespace LiteBulb.OatShop.Application.Dtos;
 public class Order : Dto
 {
     public int CompanyId { get; set; }

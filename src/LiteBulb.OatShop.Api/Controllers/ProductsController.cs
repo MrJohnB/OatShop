@@ -1,4 +1,4 @@
-﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
+﻿using LiteBulb.OatShop.Application.Dtos;
 using LiteBulb.OatShop.SharedKernel.Services.Data;
 using Microsoft.AspNetCore.Mvc;
 

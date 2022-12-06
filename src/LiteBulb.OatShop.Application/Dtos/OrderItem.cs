@@ -1,6 +1,6 @@
-﻿using LiteBulb.OatShop.ApplicationCore.Extensions;
+﻿using LiteBulb.OatShop.Application.Extensions;
 
-namespace LiteBulb.OatShop.ApplicationCore.Dtos;
+namespace LiteBulb.OatShop.Application.Dtos;
 public class OrderItem : Dto
 {
     public int OrderId { get; set; }

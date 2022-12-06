@@ -1,4 +1,4 @@
-namespace LiteBulb.OatShop.ApplicationCore.Tests;
+namespace LiteBulb.OatShop.Application.Tests;
 
 [TestClass]
 public class UnitTest1

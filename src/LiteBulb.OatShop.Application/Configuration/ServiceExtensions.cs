@@ -1,10 +1,10 @@
-﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
-using LiteBulb.OatShop.ApplicationCore.Services.Data;
-using LiteBulb.OatShop.ApplicationCore.Services.FeeCalculation;
+﻿using LiteBulb.OatShop.Application.Dtos;
+using LiteBulb.OatShop.Application.Services.Data;
+using LiteBulb.OatShop.Application.Services.FeeCalculation;
 using LiteBulb.OatShop.SharedKernel.Services.Data;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LiteBulb.OatShop.ApplicationCore.Configuration;
+namespace LiteBulb.OatShop.Application.Configuration;
 public static class ServiceExtensions
 {
     public static IServiceCollection AddServices(this IServiceCollection services)

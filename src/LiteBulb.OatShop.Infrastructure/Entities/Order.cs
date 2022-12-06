@@ -1,4 +1,4 @@
-﻿using LiteBulb.OatShop.ApplicationCore.Enumerations;
+﻿using LiteBulb.OatShop.Application.Enumerations;
 
 namespace LiteBulb.OatShop.Infrastructure.Entities;
 public class Order : Entity

@@ -1,6 +1,6 @@
-﻿using LiteBulb.OatShop.ApplicationCore.Dtos;
+﻿using LiteBulb.OatShop.Application.Dtos;
 
-namespace LiteBulb.OatShop.ApplicationCore.Extensions;
+namespace LiteBulb.OatShop.Application.Extensions;
 public static class OrderExtensions
 {
     public static decimal CalculateOrderSubtotal(this Order order)

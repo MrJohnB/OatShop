@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace LiteBulb.OatShop.ApplicationCore.Services.FeeCalculation;
+namespace LiteBulb.OatShop.Application.Services.FeeCalculation;
 
 /// <summary>
 /// Service Locator Pattern

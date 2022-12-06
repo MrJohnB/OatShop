@@ -1,4 +1,4 @@
-﻿namespace LiteBulb.OatShop.ApplicationCore.Dtos;
+﻿namespace LiteBulb.OatShop.Application.Dtos;
 public class Customer : Dto
 {
     public string FirstName { get; set; } = string.Empty;

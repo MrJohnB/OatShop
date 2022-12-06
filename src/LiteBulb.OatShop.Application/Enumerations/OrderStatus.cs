@@ -1,4 +1,4 @@
-﻿namespace LiteBulb.OatShop.ApplicationCore.Enumerations;
+﻿namespace LiteBulb.OatShop.Application.Enumerations;
 public enum OrderStatus
 {
     None = 0,

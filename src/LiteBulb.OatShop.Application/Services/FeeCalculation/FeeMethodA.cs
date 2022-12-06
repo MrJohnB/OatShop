@@ -1,4 +1,4 @@
-﻿namespace LiteBulb.OatShop.ApplicationCore.Services.FeeCalculation;
+﻿namespace LiteBulb.OatShop.Application.Services.FeeCalculation;
 internal class FeeMethodA : IFeeMethod
 {
     public decimal CalculateServiceFee()
