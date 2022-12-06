@@ -1,4 +1,4 @@
-﻿namespace LiteBulb.OatShop.SharedKernel.Services.Data;
+﻿namespace LiteBulb.OatShop.Shared.Services.Data;
 public interface IService<T>
 {
     Task<ServiceResponse<IReadOnlyList<T>>> GetAsync();

@@ -1,4 +1,4 @@
-﻿namespace LiteBulb.OatShop.SharedKernel.Mappers;
+﻿namespace LiteBulb.OatShop.Shared.Mappers;
 public interface IMapper<TEntity, TModel>
 {
     TModel ToModel(TEntity entity);

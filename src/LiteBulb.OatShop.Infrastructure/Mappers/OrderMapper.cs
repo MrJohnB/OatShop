@@ -1,5 +1,5 @@
 ﻿using LiteBulb.OatShop.Application.Dtos;
-using LiteBulb.OatShop.SharedKernel.Mappers;
+using LiteBulb.OatShop.Shared.Mappers;
 
 namespace LiteBulb.OatShop.Infrastructure.Mappers;
 public class OrderMapper : IMapper<Entities.Order, Order>

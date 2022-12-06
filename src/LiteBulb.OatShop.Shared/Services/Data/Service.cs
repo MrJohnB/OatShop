@@ -1,8 +1,8 @@
-﻿using LiteBulb.OatShop.SharedKernel.Entities;
-using LiteBulb.OatShop.SharedKernel.Repositories;
+﻿using LiteBulb.OatShop.Shared.Entities;
+using LiteBulb.OatShop.Shared.Repositories;
 using Microsoft.Extensions.Logging;
 
-namespace LiteBulb.OatShop.SharedKernel.Services.Data;
+namespace LiteBulb.OatShop.Shared.Services.Data;
 public abstract class Service<TModel> : IService<TModel>
     where TModel : IEntity<int>
 {

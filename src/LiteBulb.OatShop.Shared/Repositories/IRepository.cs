@@ -1,4 +1,4 @@
-﻿namespace LiteBulb.OatShop.SharedKernel.Repositories;
+﻿namespace LiteBulb.OatShop.Shared.Repositories;
 public interface IRepository<T>
 {
     Task<IReadOnlyList<T>> GetAsync();

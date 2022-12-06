@@ -1,6 +1,6 @@
 ﻿using LiteBulb.OatShop.Application.Dtos;
-using LiteBulb.OatShop.SharedKernel.Repositories;
-using LiteBulb.OatShop.SharedKernel.Services.Data;
+using LiteBulb.OatShop.Shared.Repositories;
+using LiteBulb.OatShop.Shared.Services.Data;
 using Microsoft.Extensions.Logging;
 
 namespace LiteBulb.OatShop.Application.Services.Data;

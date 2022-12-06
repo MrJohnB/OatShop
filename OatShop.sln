@@ -15,13 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteBulb.OatShop.WebAdmin",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteBulb.OatShop.Application", "src\LiteBulb.OatShop.Application\LiteBulb.OatShop.Application.csproj", "{3EECEBC6-78BA-457A-BF1F-95C36F6B4D40}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteBulb.OatShop.SharedKernel", "src\LiteBulb.OatShop.SharedKernel\LiteBulb.OatShop.SharedKernel.csproj", "{B56EB8A9-FEF2-4929-AF9A-6D7AA4B5AEE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteBulb.OatShop.Shared", "src\LiteBulb.OatShop.Shared\LiteBulb.OatShop.Shared.csproj", "{B56EB8A9-FEF2-4929-AF9A-6D7AA4B5AEE5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteBulb.OatShop.Web", "src\LiteBulb.OatShop.Web\LiteBulb.OatShop.Web.csproj", "{043D4A61-EBE8-4735-9C22-1915D23AF48D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteBulb.OatShop.Application.Tests", "test\LiteBulb.OatShop.Application.Tests\LiteBulb.OatShop.Application.Tests.csproj", "{BBB6F3D3-B3FD-4994-A810-D769BFE16A51}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteBulb.OatShop.SharedKernel.Tests", "test\LiteBulb.OatShop.SharedKernel.Tests\LiteBulb.OatShop.SharedKernel.Tests.csproj", "{50E6CD53-9978-488B-834D-DCFFB0F20F79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteBulb.OatShop.Shared.Tests", "test\LiteBulb.OatShop.Shared.Tests\LiteBulb.OatShop.Shared.Tests.csproj", "{50E6CD53-9978-488B-834D-DCFFB0F20F79}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiteBulb.OatShop.Infrastructure.Migrations", "src\LiteBulb.OatShop.Infrastructure.Migrations\LiteBulb.OatShop.Infrastructure.Migrations.csproj", "{60BFDFC3-1576-4001-BC66-6AA2D707CD4A}"
 EndProject

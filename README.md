@@ -42,14 +42,14 @@ src\
     LiteBulb.OatShop.WebAdmin (Blazor Server SPA)
     LiteBulb.OatShop.Api (ASP.NET WebAPI REST)
     LiteBulb.OatShop.Application (Business logic, DTOs)
-    LiteBulb.OatShop.SharedKernel (Project to share common code between repos - could become NuGet package)
+    LiteBulb.OatShop.Shared (Project to share common code between repos - could become NuGet package)
     LiteBulb.OatShop.Infrastructure (Database and external services)
     LiteBulb.OatShop.Infrastructure.Migrations (Strictly for EF Core migrations)
 
 test\
 
     LiteBulb.OatShop.Application.Tests (Unit & Integration tests)
-    LiteBulb.OatShop.SharedKernel.Tests (Unit & Integration tests)
+    LiteBulb.OatShop.Shared.Tests (Unit & Integration tests)
     LiteBulb.OatShop.Infrastructure.Tests (Unit & Integration tests)
 ```
 

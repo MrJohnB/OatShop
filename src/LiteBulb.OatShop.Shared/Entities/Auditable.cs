@@ -1,4 +1,4 @@
-﻿namespace LiteBulb.OatShop.SharedKernel.Entities;
+﻿namespace LiteBulb.OatShop.Shared.Entities;
 public abstract class Auditable : IAuditable
 {
     public DateTime Created { get; set; }

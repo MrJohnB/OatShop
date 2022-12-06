@@ -1,5 +1,5 @@
 ﻿using LiteBulb.OatShop.Application.Dtos;
-using LiteBulb.OatShop.SharedKernel.Repositories;
+using LiteBulb.OatShop.Shared.Repositories;
 using Microsoft.Extensions.Logging;
 
 namespace LiteBulb.OatShop.Infrastructure.Repositories.Proxies;
