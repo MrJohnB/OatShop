@@ -17,17 +17,17 @@ public abstract class Service<TModel> : IService<TModel>
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
     }
 
-    public virtual async Task<ServiceResponse<ICollection<TModel>>> GetAsync()
+    public virtual async Task<ServiceResponse<IReadOnlyList<TModel>>> GetAsync()
     {
         var result = await _repository.GetAsync();
 
         if (result is null)
         {
-            return new ServiceResponse<ICollection<TModel>>(true,
+            return new ServiceResponse<IReadOnlyList<TModel>>(true,
                 $"Error occurred while retrieving list of {_modelName} objects.  Result was null for some reason.");
         }
 
-        return new ServiceResponse<ICollection<TModel>>(result);
+        return new ServiceResponse<IReadOnlyList<TModel>>(result);
     }
 
     public virtual async Task<ServiceResponse<TModel>> GetAsync(int id)

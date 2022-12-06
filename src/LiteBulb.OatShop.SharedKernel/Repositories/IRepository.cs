@@ -1,7 +1,7 @@
 ﻿namespace LiteBulb.OatShop.SharedKernel.Repositories;
 public interface IRepository<T>
 {
-    Task<ICollection<T>> GetAsync();
+    Task<IReadOnlyList<T>> GetAsync();
     Task<T?> GetAsync(int id);
     Task<T> AddAsync(T model);
     Task<int?> UpdateAsync(T model);

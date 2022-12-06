@@ -28,7 +28,7 @@ public class OrderItemMapper : IMapper<Entities.OrderItem, OrderItem>
         };
     }
 
-    public ICollection<OrderItem> ToModel(ICollection<Entities.OrderItem> entities)
+    public IReadOnlyList<OrderItem> ToModel(IEnumerable<Entities.OrderItem> entities)
     {
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
@@ -59,7 +59,7 @@ public class OrderItemMapper : IMapper<Entities.OrderItem, OrderItem>
         };
     }
 
-    public ICollection<Entities.OrderItem> ToEntity(ICollection<OrderItem> models)
+    public IReadOnlyList<Entities.OrderItem> ToEntity(IEnumerable<OrderItem> models)
     {
         ArgumentNullException.ThrowIfNull(models, nameof(models));
 

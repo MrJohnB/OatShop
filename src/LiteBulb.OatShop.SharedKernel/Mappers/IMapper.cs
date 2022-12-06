@@ -2,7 +2,7 @@
 public interface IMapper<TEntity, TModel>
 {
     TModel ToModel(TEntity entity);
-    ICollection<TModel> ToModel(ICollection<TEntity> entities);
+    IReadOnlyList<TModel> ToModel(IEnumerable<TEntity> entities);
     TEntity ToEntity(TModel model);
-    ICollection<TEntity> ToEntity(ICollection<TModel> models);
+    IReadOnlyList<TEntity> ToEntity(IEnumerable<TModel> models);
 }

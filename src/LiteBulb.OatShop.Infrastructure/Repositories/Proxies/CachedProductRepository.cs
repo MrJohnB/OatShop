@@ -32,9 +32,10 @@ public class CachedProductRepository : IRepository<Product>
         return _productRepository.DeleteAsync(id);
     }
 
-    public Task<ICollection<Product>> GetAsync()
+    public Task<IReadOnlyList<Product>> GetAsync()
     {
-        return Task.FromResult(_products.Values);
+        IReadOnlyList<Product> result = _products.Values.ToList(); // TODO: return the souce collection or a copy?
+        return Task.FromResult(result);
     }
 
     public Task<Product?> GetAsync(int id)

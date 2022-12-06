@@ -24,9 +24,9 @@ public abstract class Repository<TEntity, TModel> : IRepository<TModel>
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
-    public virtual async Task<ICollection<TModel>> GetAsync()
+    public virtual async Task<IReadOnlyList<TModel>> GetAsync()
     {
-        var entities = await DbSet.ToArrayAsync();
+        var entities = await DbSet.ToListAsync();
 
         return _mapper.ToModel(entities);
     }

@@ -10,11 +10,11 @@ public class OrderItemRepository : Repository<Entities.OrderItem, OrderItem>
     public OrderItemRepository(ILogger<OrderItemRepository> logger, OatShopDbContext dbContext, IMapper<Entities.OrderItem, OrderItem> mapper)
         : base(logger, dbContext, mapper) { }
 
-    public override async Task<ICollection<OrderItem>> GetAsync()
+    public override async Task<IReadOnlyList<OrderItem>> GetAsync()
     {
         var entities = await DbSet
             .Include(x => x.Product)
-            .ToArrayAsync();
+            .ToListAsync();
 
         return Mapper.ToModel(entities);
     }

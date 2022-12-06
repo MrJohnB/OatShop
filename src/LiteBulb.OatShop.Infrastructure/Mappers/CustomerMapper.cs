@@ -36,7 +36,7 @@ public class CustomerMapper : IMapper<Entities.Customer, Customer>
         };
     }
 
-    public ICollection<Customer> ToModel(ICollection<Entities.Customer> entities)
+    public IReadOnlyList<Customer> ToModel(IEnumerable<Entities.Customer> entities)
     {
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
@@ -75,7 +75,7 @@ public class CustomerMapper : IMapper<Entities.Customer, Customer>
         };
     }
 
-    public ICollection<Entities.Customer> ToEntity(ICollection<Customer> models)
+    public IReadOnlyList<Entities.Customer> ToEntity(IEnumerable<Customer> models)
     {
         ArgumentNullException.ThrowIfNull(models, nameof(models));
 

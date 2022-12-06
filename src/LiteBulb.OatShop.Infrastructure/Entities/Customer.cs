@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace LiteBulb.OatShop.Infrastructure.Entities;
+﻿namespace LiteBulb.OatShop.Infrastructure.Entities;
 public class Customer : Entity
 {
     public string FirstName { get; set; } = string.Empty;
@@ -15,5 +13,5 @@ public class Customer : Entity
     public string State { get; set; } = string.Empty;
     public string County { get; set; } = string.Empty;
     public string Country { get; set; } = string.Empty;
-    public virtual ICollection<Order> Orders { get; set; } = new Collection<Order>();
+    public virtual IReadOnlyCollection<Order> Orders { get; set; } = null!;
 }

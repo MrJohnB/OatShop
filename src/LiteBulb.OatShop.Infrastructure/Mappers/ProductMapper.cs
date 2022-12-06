@@ -21,7 +21,7 @@ public class ProductMapper : IMapper<Entities.Product, Product>
         };
     }
 
-    public ICollection<Product> ToModel(ICollection<Entities.Product> entities)
+    public IReadOnlyList<Product> ToModel(IEnumerable<Entities.Product> entities)
     {
         ArgumentNullException.ThrowIfNull(entities, nameof(entities));
 
@@ -52,7 +52,7 @@ public class ProductMapper : IMapper<Entities.Product, Product>
         };
     }
 
-    public ICollection<Entities.Product> ToEntity(ICollection<Product> models)
+    public IReadOnlyList<Entities.Product> ToEntity(IEnumerable<Product> models)
     {
         ArgumentNullException.ThrowIfNull(models, nameof(models));
 
