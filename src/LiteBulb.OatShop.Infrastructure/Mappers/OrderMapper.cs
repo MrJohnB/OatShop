@@ -53,9 +53,8 @@ public class OrderMapper : IMapper<Entities.Order, Order>
             CustomerId = model.CustomerId,
             OrderStatus = model.OrderStatus,
             Discount = model.Discount,
-            OrderItems = _orderItemMapper.ToEntity(model.OrderItems),
-            Created = model.Created,
-            LastModified = model.LastModified
+            OrderItems = _orderItemMapper.ToEntity(model.OrderItems)
+            // Note: ignore Created and LastModified
         };
     }
 

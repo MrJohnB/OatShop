@@ -168,7 +168,9 @@ public class CustomersController : ControllerBase
         _logger.LogDebug($"Entering controller method: {nameof(UpdateAsync)}");
 
         if (id != customer.Id)
+        {
             return BadRequest("Id parameter and Customer.Id property must match for Update.");
+        }
 
         var response = await _customerService.UpdateAsync(customer);
 

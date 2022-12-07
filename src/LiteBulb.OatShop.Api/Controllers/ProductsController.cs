@@ -168,7 +168,9 @@ public class ProductsController : ControllerBase
         _logger.LogDebug($"Entering controller method: {nameof(UpdateAsync)}");
 
         if (id != product.Id)
+        {
             return BadRequest("Id parameter and Product.Id property must match for Update.");
+        }
 
         var response = await _productService.UpdateAsync(product);
 

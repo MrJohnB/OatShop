@@ -69,9 +69,8 @@ public class CustomerMapper : IMapper<Entities.Customer, Customer>
             State = model.State,
             County = model.County,
             Country = model.Country,
-            Orders = _orderMapper.ToEntity(model.Orders),
-            Created = model.Created,
-            LastModified = model.LastModified
+            Orders = _orderMapper.ToEntity(model.Orders)
+            // Note: ignore Created and LastModified
         };
     }
 

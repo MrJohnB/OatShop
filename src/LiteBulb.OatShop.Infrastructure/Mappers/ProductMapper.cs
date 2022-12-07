@@ -46,9 +46,8 @@ public class ProductMapper : IMapper<Entities.Product, Product>
             Description = model.Description,
             Category = model.Category,
             OriginalPrice = model.OriginalPrice,
-            Discount = model.Discount,
-            Created = model.Created,
-            LastModified = model.LastModified
+            Discount = model.Discount
+            // Note: ignore Created and LastModified
         };
     }
 

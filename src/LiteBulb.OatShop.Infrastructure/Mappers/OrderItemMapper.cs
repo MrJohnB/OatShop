@@ -53,9 +53,8 @@ public class OrderItemMapper : IMapper<Entities.OrderItem, OrderItem>
             Product = _productMapper.ToEntity(model.Product), // TODO: should OrderItem.Product be nullable?
             Name = model.Name,
             OriginalPrice = model.OriginalPrice,
-            Discount = model.Discount,
-            Created = model.Created,
-            LastModified = model.LastModified
+            Discount = model.Discount
+            // Note: ignore Created and LastModified
         };
     }
 
