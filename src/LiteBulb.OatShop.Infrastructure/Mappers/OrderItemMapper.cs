@@ -24,7 +24,7 @@ public class OrderItemMapper : IMapper<Entities.OrderItem, OrderItem>
             OriginalPrice = entity.OriginalPrice,
             Discount = entity.Discount,
             Created = entity.Created,
-            Updated = entity.Updated
+            LastModified = entity.LastModified
         };
     }
 
@@ -55,7 +55,7 @@ public class OrderItemMapper : IMapper<Entities.OrderItem, OrderItem>
             OriginalPrice = model.OriginalPrice,
             Discount = model.Discount,
             Created = model.Created,
-            Updated = model.Updated
+            LastModified = model.LastModified
         };
     }
 

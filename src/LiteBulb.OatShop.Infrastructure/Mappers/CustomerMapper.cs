@@ -32,7 +32,7 @@ public class CustomerMapper : IMapper<Entities.Customer, Customer>
             Country = entity.Country,
             Orders = _orderMapper.ToModel(entity.Orders),
             Created = entity.Created,
-            Updated = entity.Updated
+            LastModified = entity.LastModified
         };
     }
 
@@ -71,7 +71,7 @@ public class CustomerMapper : IMapper<Entities.Customer, Customer>
             Country = model.Country,
             Orders = _orderMapper.ToEntity(model.Orders),
             Created = model.Created,
-            Updated = model.Updated
+            LastModified = model.LastModified
         };
     }
 

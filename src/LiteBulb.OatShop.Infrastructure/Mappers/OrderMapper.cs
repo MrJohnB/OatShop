@@ -24,7 +24,7 @@ public class OrderMapper : IMapper<Entities.Order, Order>
             Discount = entity.Discount,
             OrderItems = _orderItemMapper.ToModel(entity.OrderItems),
             Created = entity.Created,
-            Updated = entity.Updated
+            LastModified = entity.LastModified
         };
     }
 
@@ -55,7 +55,7 @@ public class OrderMapper : IMapper<Entities.Order, Order>
             Discount = model.Discount,
             OrderItems = _orderItemMapper.ToEntity(model.OrderItems),
             Created = model.Created,
-            Updated = model.Updated
+            LastModified = model.LastModified
         };
     }
 

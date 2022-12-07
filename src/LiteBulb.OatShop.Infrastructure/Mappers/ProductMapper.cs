@@ -17,7 +17,7 @@ public class ProductMapper : IMapper<Entities.Product, Product>
             OriginalPrice = entity.OriginalPrice,
             Discount = entity.Discount,
             Created = entity.Created,
-            Updated = entity.Updated
+            LastModified = entity.LastModified
         };
     }
 
@@ -48,7 +48,7 @@ public class ProductMapper : IMapper<Entities.Product, Product>
             OriginalPrice = model.OriginalPrice,
             Discount = model.Discount,
             Created = model.Created,
-            Updated = model.Updated
+            LastModified = model.LastModified
         };
     }
 
