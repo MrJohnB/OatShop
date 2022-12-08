@@ -16,6 +16,7 @@ public static class ServiceExtensions
         var serverVersion = ServerVersion.AutoDetect(connectionString);
 
         // For common usages, see pull request #1233.
+        // Default service lifetime is Scoped
         return services.AddDbContext<OatShopDbContext>(
             optionsBuilder => optionsBuilder
                 .UseMySql(connectionString, serverVersion)

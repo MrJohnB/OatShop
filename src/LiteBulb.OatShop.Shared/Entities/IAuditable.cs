@@ -1,7 +1,6 @@
-﻿
-namespace LiteBulb.OatShop.Shared.Entities;
+﻿namespace LiteBulb.OatShop.Shared.Entities;
 public interface IAuditable
 {
-    DateTimeOffset Created { get; protected set; }
-    DateTimeOffset LastModified { get; protected set; }
+    DateTimeOffset Created { get; set; }
+    DateTimeOffset LastModified { get; set; }
 }

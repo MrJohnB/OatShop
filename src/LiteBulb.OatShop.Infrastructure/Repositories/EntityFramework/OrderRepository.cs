@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework;
-public class OrderRepository : Repository<Entities.Order, Order>
+public class OrderRepository : AuditableRepository<Entities.Order, Order>
 {
     public OrderRepository(ILogger<OrderRepository> logger, OatShopDbContext dbContext, IMapper<Entities.Order, Order> mapper)
         : base(logger, dbContext, mapper) { }

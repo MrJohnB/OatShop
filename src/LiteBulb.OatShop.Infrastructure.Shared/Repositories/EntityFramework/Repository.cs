@@ -62,7 +62,7 @@ public abstract class Repository<TEntity, TModel> : IRepository<TModel>
 
     public virtual async Task<int?> UpdateAsync(TModel model)
     {
-        // TODO: 2 round trips to the database
+        // TODO: avoid 2 round trips to the database?
 
         var hasAny = await DbSet.AnyAsync(x => x.Id == model.Id);
 
@@ -79,7 +79,7 @@ public abstract class Repository<TEntity, TModel> : IRepository<TModel>
 
     public virtual async Task<int?> DeleteAsync(int id)
     {
-        // TODO: 2 round trips to the database
+        // TODO: avoid 2 round trips to the database?
 
         var entity = await DbSet.FindAsync(id);
 
