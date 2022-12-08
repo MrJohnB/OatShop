@@ -72,9 +72,9 @@ public class ProductsController : ControllerBase
     {
         _logger.LogDebug($"Entering controller method: {nameof(GetByIdAsync)}");
 
-        if (id == 0)
+        if (id == default)
         {
-            return BadRequest("Id parameter cannot be 0 for Get by Id.");
+            return BadRequest($"Id parameter cannot contain default value: '{id}' for Find By Id.");
         }
 
         var response = await _productService.GetAsync(id);
@@ -100,7 +100,7 @@ public class ProductsController : ControllerBase
     /// <summary>
     /// Add a new Product object to database.
     /// </summary>
-    /// <remarks>Id field must be null or 0.</remarks>
+    /// <remarks>Do not set Id field to a non-default value.</remarks>
     /// <example>POST api/s</example>
     /// <param name="product">Product object to add (JSON)</param>
     /// <response code="201" cref="Product">Created object</response>
@@ -119,9 +119,9 @@ public class ProductsController : ControllerBase
             return BadRequest("Product parameter cannot be null for Create.");
         }
 
-        if (product.Id != 0)
+        if (product.Id != default)
         {
-            return BadRequest("Product.Id property must be 0 for Create.");
+            return BadRequest("Customer.Id property cannot have non-default value for Create.");
         }
 
         var response = await _productService.AddAsync(product);
@@ -150,7 +150,7 @@ public class ProductsController : ControllerBase
     /// <summary>
     /// Update a Product object in the database.
     /// </summary>
-    /// <remarks>The id value in the route must match the Id field in the supplied Product object</remarks>
+    /// <remarks>Do not set Customer.Id field to a non-default value.</remarks>
     /// <example>PUT api/Products/5</example>
     /// <param name="id">Id of the object to update</param>
     /// <param name="product">Product object to update (JSON)</param>
@@ -167,10 +167,22 @@ public class ProductsController : ControllerBase
     {
         _logger.LogDebug($"Entering controller method: {nameof(UpdateAsync)}");
 
-        if (id != product.Id)
+        if (product is null)
         {
-            return BadRequest("Id parameter and Product.Id property must match for Update.");
+            return BadRequest("Customer parameter cannot be null for Update.");
         }
+
+        if (id == default)
+        {
+            return BadRequest($"Id parameter cannot contain default value: '{id}' for Update.");
+        }
+
+        if (product.Id != default)
+        {
+            return BadRequest("Customer.Id property cannot have non-default value for Update.");
+        }
+
+        product.Id = id;
 
         var response = await _productService.UpdateAsync(product);
 
@@ -205,9 +217,9 @@ public class ProductsController : ControllerBase
     {
         _logger.LogDebug($"Entering controller method: {nameof(DeleteByIdAsync)}");
 
-        if (id == 0)
+        if (id == default)
         {
-            return BadRequest("Id parameter cannot be 0 for Delete by Id.");
+            return BadRequest($"Id parameter cannot contain default value: '{id}' for Delete By Id.");
         }
 
         var response = await _productService.DeleteAsync(id);

@@ -72,9 +72,9 @@ public class CustomersController : ControllerBase
     {
         _logger.LogDebug($"Entering controller method: {nameof(GetByIdAsync)}");
 
-        if (id == 0)
+        if (id == default)
         {
-            return BadRequest("Id parameter cannot be 0 for Find by Id.");
+            return BadRequest($"Id parameter cannot contain default value: '{id}' for Find By Id.");
         }
 
         var response = await _customerService.GetAsync(id);
@@ -100,7 +100,7 @@ public class CustomersController : ControllerBase
     /// <summary>
     /// Add a new Customer object to database.
     /// </summary>
-    /// <remarks>Id field must be null or 0.</remarks>
+    /// <remarks>Do not set Id field to a non-default value.</remarks>
     /// <example>POST api/Customers</example>
     /// <param name="customer">Customer object to add (JSON)</param>
     /// <response code="201" cref="Customer">Created object</response>
@@ -110,7 +110,7 @@ public class CustomersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Customer))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> CreateAsync([FromBody] Customer customer)
+    public async Task<IActionResult> CreateAsync([FromBody] Customer? customer)
     {
         _logger.LogDebug($"Entering controller method: {nameof(CreateAsync)}");
 
@@ -119,9 +119,9 @@ public class CustomersController : ControllerBase
             return BadRequest("Customer parameter cannot be null for Create.");
         }
 
-        if (customer.Id != 0)
+        if (customer.Id != default)
         {
-            return BadRequest("Customer.Id property must be 0 for Create.");
+            return BadRequest("Customer.Id property cannot have non-default value for Create.");
         }
 
         var response = await _customerService.AddAsync(customer);
@@ -150,7 +150,7 @@ public class CustomersController : ControllerBase
     /// <summary>
     /// Update a Customer object in the database.
     /// </summary>
-    /// <remarks>The id value in the route must match the Id field in the supplied Customer object</remarks>
+    /// <remarks>Do not set Customer.Id field to a non-default value.</remarks>
     /// <example>PUT api/Customers/5</example>
     /// <param name="id">Id of the object to update</param>
     /// <param name="customer">Customer object to update (JSON)</param>
@@ -167,10 +167,22 @@ public class CustomersController : ControllerBase
     {
         _logger.LogDebug($"Entering controller method: {nameof(UpdateAsync)}");
 
-        if (id != customer.Id)
+        if (customer is null)
         {
-            return BadRequest("Id parameter and Customer.Id property must match for Update.");
+            return BadRequest("Customer parameter cannot be null for Update.");
         }
+
+        if (id == default)
+        {
+            return BadRequest($"Id parameter cannot contain default value: '{id}' for Update.");
+        }
+
+        if (customer.Id != default)
+        {
+            return BadRequest("Customer.Id property cannot have non-default value for Update.");
+        }
+
+        customer.Id = id;
 
         var response = await _customerService.UpdateAsync(customer);
 
@@ -205,9 +217,9 @@ public class CustomersController : ControllerBase
     {
         _logger.LogDebug($"Entering controller method: {nameof(DeleteByIdAsync)}");
 
-        if (id == 0)
+        if (id == default)
         {
-            return BadRequest("Id parameter cannot be 0 for Delete by Id.");
+            return BadRequest($"Id parameter cannot contain default value: '{id}' for Delete By Id.");
         }
 
         var response = await _customerService.DeleteAsync(id);
