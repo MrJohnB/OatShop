@@ -19,7 +19,11 @@ public static class ServiceExtensions
         // Default service lifetime is Scoped
         return services.AddDbContext<OatShopDbContext>(
             optionsBuilder => optionsBuilder
-                .UseMySql(connectionString, serverVersion)
+                .UseMySql(connectionString, serverVersion, options => options
+                    .EnableRetryOnFailure(
+                        maxRetryCount: 3,
+                        maxRetryDelay: TimeSpan.FromSeconds(30),
+                        errorNumbersToAdd: null))
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
                 // The following three options help with debugging, but should
                 // be changed or removed for production.
