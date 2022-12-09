@@ -2,6 +2,8 @@
 using LiteBulb.OatShop.Shared.Repositories;
 using Microsoft.Extensions.Logging;
 
+// TODO: refactor to be generic: CachedRepository<TId>
+
 namespace LiteBulb.OatShop.Infrastructure.Repositories.Proxies;
 public class CachedProductRepository : IRepository<Product>
 {
@@ -48,13 +50,13 @@ public class CachedProductRepository : IRepository<Product>
         return _productRepository.GetAsync(id);
     }
 
-    public Task<int?> UpdateAsync(Product model)
+    public Task<int?> UpdateAsync(int id, Product model)
     {
-        if (_products.ContainsKey(model.Id))
+        if (_products.ContainsKey(id))
         {
-            _products[model.Id] = model;
+            _products[id] = model;
         }
 
-        return _productRepository.UpdateAsync(model);
+        return _productRepository.UpdateAsync(id, model);
     }
 }

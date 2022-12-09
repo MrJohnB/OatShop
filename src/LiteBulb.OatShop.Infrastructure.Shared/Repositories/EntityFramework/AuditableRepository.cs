@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 namespace LiteBulb.OatShop.Infrastructure.Shared.Repositories.EntityFramework;
 public abstract class AuditableRepository<TEntity, TModel> : Repository<TEntity, TModel>
     where TEntity : class, IEntity<int>, IAuditable
-    where TModel : class, IEntity<int>
 {
     public AuditableRepository(ILogger logger, DbContext dbContext, IMapper<TEntity, TModel> mapper)
         : base(logger, dbContext, mapper) { }
@@ -29,11 +28,11 @@ public abstract class AuditableRepository<TEntity, TModel> : Repository<TEntity,
         return Mapper.ToModel(entity); // TODO: or just keep the model and get the generated id (model.Id = entity.Id)
     }
 
-    public override async Task<int?> UpdateAsync(TModel model)
+    public override async Task<int?> UpdateAsync(int id, TModel model)
     {
         // TODO: avoid 2 round trips to the database?
 
-        var hasAny = await DbSet.AnyAsync(x => x.Id == model.Id);
+        var hasAny = await DbSet.AnyAsync(x => x.Id == id);
 
         if (!hasAny)
         {
@@ -41,6 +40,8 @@ public abstract class AuditableRepository<TEntity, TModel> : Repository<TEntity,
         }
 
         var entity = Mapper.ToEntity(model);
+
+        entity.Id = id;
 
         entity.LastModified = DateTimeOffset.UtcNow;
 

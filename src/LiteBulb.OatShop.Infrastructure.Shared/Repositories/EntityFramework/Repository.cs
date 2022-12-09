@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 namespace LiteBulb.OatShop.Infrastructure.Shared.Repositories.EntityFramework;
 public abstract class Repository<TEntity, TModel> : IRepository<TModel>
     where TEntity : class, IEntity<int>
-    where TModel : class, IEntity<int>
 {
     private readonly ILogger _logger;
     private readonly DbContext _dbContext;
@@ -60,11 +59,11 @@ public abstract class Repository<TEntity, TModel> : IRepository<TModel>
         return _mapper.ToModel(entity); // TODO: or just keep the model and get the generated id (model.Id = entity.Id)
     }
 
-    public virtual async Task<int?> UpdateAsync(TModel model)
+    public virtual async Task<int?> UpdateAsync(int id, TModel model)
     {
         // TODO: avoid 2 round trips to the database?
 
-        var hasAny = await DbSet.AnyAsync(x => x.Id == model.Id);
+        var hasAny = await DbSet.AnyAsync(x => x.Id == id);
 
         if (!hasAny)
         {
@@ -72,6 +71,8 @@ public abstract class Repository<TEntity, TModel> : IRepository<TModel>
         }
 
         var entity = _mapper.ToEntity(model);
+
+        entity.Id = id;
 
         DbContext.Update(entity);
         return await DbContext.SaveChangesAsync(); // updated count

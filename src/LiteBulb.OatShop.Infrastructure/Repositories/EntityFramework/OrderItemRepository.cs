@@ -32,4 +32,10 @@ public class OrderItemRepository : AuditableRepository<Entities.OrderItem, Order
 
         return Mapper.ToModel(entity);
     }
+
+    // TODO: add Create that checks if Product exists first
+
+    // TODO: add Update that checks if Product exists first
+
+    // TODO: DTO should only allow Product Id field, not object JSON
 }

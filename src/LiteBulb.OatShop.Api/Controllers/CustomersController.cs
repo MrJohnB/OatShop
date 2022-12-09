@@ -182,9 +182,7 @@ public class CustomersController : ControllerBase
             return BadRequest("Customer.Id property cannot have non-default value for Update.");
         }
 
-        customer.Id = id;
-
-        var response = await _customerService.UpdateAsync(customer);
+        var response = await _customerService.UpdateAsync(id, customer);
 
         if (response is null)
         {
