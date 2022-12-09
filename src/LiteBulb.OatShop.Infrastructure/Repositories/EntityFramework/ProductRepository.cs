@@ -4,7 +4,7 @@ using LiteBulb.OatShop.Shared.Mappers;
 using Microsoft.Extensions.Logging;
 
 namespace LiteBulb.OatShop.Infrastructure.Repositories.EntityFramework;
-public class ProductRepository : AuditableRepository<Entities.Product, Product>
+public class ProductRepository : AuditableRepository<Entities.Product, Product, int>
 {
     public ProductRepository(ILogger<ProductRepository> logger, OatShopDbContext dbContext, IMapper<Entities.Product, Product> mapper)
         : base(logger, dbContext, mapper) { }

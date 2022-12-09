@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace LiteBulb.OatShop.Infrastructure.Shared.Repositories.EntityFramework;
-public abstract class Repository<TEntity, TModel> : IRepository<TModel>
-    where TEntity : class, IEntity<int>
+public abstract class Repository<TEntity, TModel, TId> : IRepository<TModel, TId>
+    where TEntity : class, IEntity<TId>
 {
     private readonly ILogger _logger;
     private readonly DbContext _dbContext;
@@ -31,7 +31,7 @@ public abstract class Repository<TEntity, TModel> : IRepository<TModel>
         return _mapper.ToModel(entities);
     }
 
-    public virtual async Task<TModel?> GetAsync(int id)
+    public virtual async Task<TModel?> GetAsync(TId id)
     {
         var entity = await DbSet.FindAsync(id);
 
@@ -59,11 +59,13 @@ public abstract class Repository<TEntity, TModel> : IRepository<TModel>
         return _mapper.ToModel(entity); // TODO: or just keep the model and get the generated id (model.Id = entity.Id)
     }
 
-    public virtual async Task<int?> UpdateAsync(int id, TModel model)
+    public virtual async Task<int?> UpdateAsync(TId id, TModel model)
     {
+        ArgumentNullException.ThrowIfNull(id, nameof(model));
+
         // TODO: avoid 2 round trips to the database?
 
-        var hasAny = await DbSet.AnyAsync(x => x.Id == id);
+        var hasAny = await DbSet.AnyAsync(x => id.Equals(x.Id));
 
         if (!hasAny)
         {
@@ -78,7 +80,7 @@ public abstract class Repository<TEntity, TModel> : IRepository<TModel>
         return await DbContext.SaveChangesAsync(); // updated count
     }
 
-    public virtual async Task<int?> DeleteAsync(int id)
+    public virtual async Task<int?> DeleteAsync(TId id)
     {
         // TODO: avoid 2 round trips to the database?
 

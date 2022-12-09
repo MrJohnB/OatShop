@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace LiteBulb.OatShop.Infrastructure.Shared.Repositories.EntityFramework;
-public abstract class AuditableRepository<TEntity, TModel> : Repository<TEntity, TModel>
-    where TEntity : class, IEntity<int>, IAuditable
+public abstract class AuditableRepository<TEntity, TModel, TId> : Repository<TEntity, TModel, TId>
+    where TEntity : class, IEntity<TId>, IAuditable
 {
     public AuditableRepository(ILogger logger, DbContext dbContext, IMapper<TEntity, TModel> mapper)
         : base(logger, dbContext, mapper) { }
@@ -28,11 +28,13 @@ public abstract class AuditableRepository<TEntity, TModel> : Repository<TEntity,
         return Mapper.ToModel(entity); // TODO: or just keep the model and get the generated id (model.Id = entity.Id)
     }
 
-    public override async Task<int?> UpdateAsync(int id, TModel model)
+    public override async Task<int?> UpdateAsync(TId id, TModel model)
     {
+        ArgumentNullException.ThrowIfNull(id, nameof(id));
+
         // TODO: avoid 2 round trips to the database?
 
-        var hasAny = await DbSet.AnyAsync(x => x.Id == id);
+        var hasAny = await DbSet.AnyAsync(x => id.Equals(x.Id));
 
         if (!hasAny)
         {

@@ -2,14 +2,14 @@
 using Microsoft.Extensions.Logging;
 
 namespace LiteBulb.OatShop.Shared.Services.Data;
-public abstract class Service<TModel> : IService<TModel>
+public abstract class Service<TModel, TId> : IService<TModel, TId>
 {
     private readonly ILogger _logger;
-    private readonly IRepository<TModel> _repository;
+    private readonly IRepository<TModel, TId> _repository;
 
     private readonly string _modelName = typeof(TModel).Name;
 
-    public Service(ILogger logger, IRepository<TModel> repository)
+    public Service(ILogger logger, IRepository<TModel, TId> repository)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
@@ -28,7 +28,7 @@ public abstract class Service<TModel> : IService<TModel>
         return new ServiceResponse<IReadOnlyList<TModel>>(result);
     }
 
-    public virtual async Task<ServiceResponse<TModel>> GetAsync(int id)
+    public virtual async Task<ServiceResponse<TModel>> GetAsync(TId id)
     {
         var result = await _repository.GetAsync(id);
 
@@ -54,7 +54,7 @@ public abstract class Service<TModel> : IService<TModel>
         return new ServiceResponse<TModel>(result);
     }
 
-    public virtual async Task<ServiceResponse<int>> UpdateAsync(int id, TModel model)
+    public virtual async Task<ServiceResponse<int>> UpdateAsync(TId id, TModel model)
     {
         var affectedCount = await _repository.UpdateAsync(id, model);
 
@@ -73,7 +73,7 @@ public abstract class Service<TModel> : IService<TModel>
         return new ServiceResponse<int>(affectedCount.Value);
     }
 
-    public virtual async Task<ServiceResponse<int>> DeleteAsync(int id)
+    public virtual async Task<ServiceResponse<int>> DeleteAsync(TId id)
     {
         var affectedCount = await _repository.DeleteAsync(id);
 

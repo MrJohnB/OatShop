@@ -45,10 +45,10 @@ public static class ServiceExtensions
     public static IServiceCollection AddRepositories(this IServiceCollection services)
     {
         return services
-            .AddScoped<IRepository<Customer>, CustomerRepository>()
-            .AddScoped<IRepository<OrderItem>, OrderItemRepository>()
-            .AddScoped<IRepository<Order>, OrderRepository>()
-            .AddScoped<IRepository<Product>, ProductRepository>();
+            .AddScoped<IRepository<Customer, int>, CustomerRepository>()
+            .AddScoped<IRepository<OrderItem, int>, OrderItemRepository>()
+            .AddScoped<IRepository<Order, int>, OrderRepository>()
+            .AddScoped<IRepository<Product, int>, ProductRepository>();
             //.AddScoped<IRepository<Product>, CachedProductRepository>();
     }
 }

@@ -10,9 +10,9 @@ public class OrdersController : ControllerBase
     // TODO: do mapping from Model to DTO in controller?
 
     private readonly ILogger<OrdersController> _logger;
-    private readonly IService<Order> _orderService;
+    private readonly IService<Order, int> _orderService;
 
-    public OrdersController(ILogger<OrdersController> logger, IService<Order> orderService)
+    public OrdersController(ILogger<OrdersController> logger, IService<Order, int> orderService)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _orderService = orderService ?? throw new ArgumentNullException(nameof(orderService));

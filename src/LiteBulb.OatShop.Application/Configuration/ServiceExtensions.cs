@@ -10,9 +10,9 @@ public static class ServiceExtensions
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
         return services
-            .AddScoped<IService<Customer>, CustomerService>()
-            .AddScoped<IService<Order>, OrderService>()
-            .AddScoped<IService<Product>, ProductService>();
+            .AddScoped<IService<Customer, int>, CustomerService>()
+            .AddScoped<IService<Order, int>, OrderService>()
+            .AddScoped<IService<Product, int>, ProductService>();
     }
 
     /// <summary>

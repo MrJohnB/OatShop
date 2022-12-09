@@ -1,9 +1,9 @@
 ﻿namespace LiteBulb.OatShop.Shared.Repositories;
-public interface IRepository<T>
+public interface IRepository<TModel, in TId>
 {
-    Task<IReadOnlyList<T>> GetAsync();
-    Task<T?> GetAsync(int id);
-    Task<T> AddAsync(T model);
-    Task<int?> UpdateAsync(int id, T model);
-    Task<int?> DeleteAsync(int id);
+    Task<IReadOnlyList<TModel>> GetAsync();
+    Task<TModel?> GetAsync(TId id);
+    Task<TModel> AddAsync(TModel model);
+    Task<int?> UpdateAsync(TId id, TModel model);
+    Task<int?> DeleteAsync(TId id);
 }

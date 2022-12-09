@@ -1,7 +1,5 @@
-﻿using LiteBulb.OatShop.Shared.Entities;
-
-namespace LiteBulb.OatShop.Domain.Dtos;
-public abstract class Dto : IEntity<int>
+﻿namespace LiteBulb.OatShop.Domain.Dtos;
+public abstract class Dto
 {
     public int Id { get; set; }
     public DateTimeOffset? Created { get; set; }
