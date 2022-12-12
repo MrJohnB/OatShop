@@ -41,7 +41,7 @@ public class ProductMapper : IMapper<Entities.Product, Product>
 
         return new Entities.Product()
         {
-            Id = model.Id,
+            Id = model.Id ??= 0,
             Name = model.Name,
             Description = model.Description,
             Category = model.Category,

@@ -110,18 +110,18 @@ public class CustomersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Customer))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> CreateAsync([FromBody] Customer? customer)
+    public async Task<IActionResult> CreateAsync([FromBody] Customer customer)
     {
         _logger.LogDebug($"Entering controller method: {nameof(CreateAsync)}");
 
         if (customer is null)
         {
-            return BadRequest("Customer parameter cannot be null for Create.");
+            return BadRequest("Customer object payload cannot be null for Create.");
         }
 
-        if (customer.Id != default)
+        if (customer.Id is not null and not 0)
         {
-            return BadRequest("Customer.Id property cannot have non-default value for Create.");
+            return BadRequest($"Customer.Id property must be null (or absent) or {default(int)} for Create.");
         }
 
         var response = await _customerService.AddAsync(customer);
@@ -169,7 +169,7 @@ public class CustomersController : ControllerBase
 
         if (customer is null)
         {
-            return BadRequest("Customer parameter cannot be null for Update.");
+            return BadRequest("Customer object payload cannot be null for Update.");
         }
 
         if (id == default)
@@ -177,9 +177,9 @@ public class CustomersController : ControllerBase
             return BadRequest($"Id parameter cannot contain default value: '{id}' for Update.");
         }
 
-        if (customer.Id != default)
+        if (customer.Id is not null and not 0)
         {
-            return BadRequest("Customer.Id property cannot have non-default value for Update.");
+            return BadRequest($"Customer.Id property must be null (or absent) or {default(int)} for Update.");
         }
 
         var response = await _customerService.UpdateAsync(id, customer);

@@ -56,7 +56,7 @@ public class CustomerMapper : IMapper<Entities.Customer, Customer>
 
         return new Entities.Customer()
         {
-            Id = model.Id,
+            Id = model.Id ??= 0,
             FirstName = model.FirstName,
             LastName = model.LastName,
             MobilePhone = model.MobilePhone,

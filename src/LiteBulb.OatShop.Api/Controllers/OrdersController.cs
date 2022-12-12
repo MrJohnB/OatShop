@@ -116,12 +116,12 @@ public class OrdersController : ControllerBase
 
         if (order is null)
         {
-            return BadRequest("Order parameter cannot be null for Create.");
+            return BadRequest("Order object payload cannot be null for Create.");
         }
 
-        if (order.Id != default)
+        if (order.Id is not null and not 0)
         {
-            return BadRequest("Customer.Id property cannot have non-default value for Create.");
+            return BadRequest($"Order.Id property must be null (or absent) or {default(int)} for Create.");
         }
 
         var response = await _orderService.AddAsync(order);
@@ -150,7 +150,7 @@ public class OrdersController : ControllerBase
     /// <summary>
     /// Update a Order object in the database.
     /// </summary>
-    /// <remarks>Do not set Customer.Id field to a non-default value.</remarks>
+    /// <remarks>Do not set Order.Id field to a non-default value.</remarks>
     /// <example>PUT api/Orders/5</example>
     /// <param name="id">Id of the object to update</param>
     /// <param name="order">Order object to update (JSON)</param>
@@ -169,7 +169,7 @@ public class OrdersController : ControllerBase
 
         if (order is null)
         {
-            return BadRequest("Customer parameter cannot be null for Update.");
+            return BadRequest("Order object payload cannot be null for Update.");
         }
 
         if (id == default)
@@ -177,9 +177,9 @@ public class OrdersController : ControllerBase
             return BadRequest($"Id parameter cannot contain default value: '{id}' for Update.");
         }
 
-        if (order.Id != default)
+        if (order.Id is not null and not 0)
         {
-            return BadRequest("Customer.Id property cannot have non-default value for Update.");
+            return BadRequest($"Order.Id property must be null (or absent) or {default(int)} for Update.");
         }
 
         var response = await _orderService.UpdateAsync(id, order);

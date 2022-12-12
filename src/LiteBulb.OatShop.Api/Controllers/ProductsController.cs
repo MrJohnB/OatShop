@@ -116,12 +116,12 @@ public class ProductsController : ControllerBase
 
         if (product is null)
         {
-            return BadRequest("Product parameter cannot be null for Create.");
+            return BadRequest("Product object payload cannot be null for Create.");
         }
 
-        if (product.Id != default)
+        if (product.Id is not null and not 0)
         {
-            return BadRequest("Customer.Id property cannot have non-default value for Create.");
+            return BadRequest($"Product.Id property must be null (or absent) or {default(int)} for Create.");
         }
 
         var response = await _productService.AddAsync(product);
@@ -150,7 +150,7 @@ public class ProductsController : ControllerBase
     /// <summary>
     /// Update a Product object in the database.
     /// </summary>
-    /// <remarks>Do not set Customer.Id field to a non-default value.</remarks>
+    /// <remarks>Do not set Product.Id field to a non-default value.</remarks>
     /// <example>PUT api/Products/5</example>
     /// <param name="id">Id of the object to update</param>
     /// <param name="product">Product object to update (JSON)</param>
@@ -169,7 +169,7 @@ public class ProductsController : ControllerBase
 
         if (product is null)
         {
-            return BadRequest("Customer parameter cannot be null for Update.");
+            return BadRequest("Product object payload cannot be null for Update.");
         }
 
         if (id == default)
@@ -177,9 +177,9 @@ public class ProductsController : ControllerBase
             return BadRequest($"Id parameter cannot contain default value: '{id}' for Update.");
         }
 
-        if (product.Id != default)
+        if (product.Id is not null and not 0)
         {
-            return BadRequest("Customer.Id property cannot have non-default value for Update.");
+            return BadRequest($"Product.Id property must be null (or absent) or {default(int)} for Update.");
         }
 
         var response = await _productService.UpdateAsync(id, product);

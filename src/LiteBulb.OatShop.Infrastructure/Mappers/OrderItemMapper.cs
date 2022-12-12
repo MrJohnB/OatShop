@@ -48,7 +48,7 @@ public class OrderItemMapper : IMapper<Entities.OrderItem, OrderItem>
 
         return new Entities.OrderItem()
         {
-            Id = model.Id,
+            Id = model.Id ??= 0,
             OrderId = model.OrderId,
             Product = _productMapper.ToEntity(model.Product), // TODO: should OrderItem.Product be nullable?
             Name = model.Name,

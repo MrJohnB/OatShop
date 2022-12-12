@@ -48,7 +48,7 @@ public class OrderMapper : IMapper<Entities.Order, Order>
 
         return new Entities.Order()
         {
-            Id = model.Id,
+            Id = model.Id ??= 0,
             CompanyId = model.CompanyId,
             CustomerId = model.CustomerId,
             OrderStatus = model.OrderStatus,
