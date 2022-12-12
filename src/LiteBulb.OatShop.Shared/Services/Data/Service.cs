@@ -60,7 +60,7 @@ public abstract class Service<TModel, TId> : IService<TModel, TId>
         if (result is null)
         {
             return new ServiceResponse<TModel>(true,
-                $"Error occurred while retrieving {_modelName} object with id '{id}'.  {_modelName} object was not found in the database.",
+                $"{_modelName} object with id '{id}' was not found.",
                 new NotFoundException());
         }
 
@@ -116,7 +116,7 @@ public abstract class Service<TModel, TId> : IService<TModel, TId>
         if (affectedCount is null || !affectedCount.HasValue)
         {
             return new ServiceResponse<int>(true,
-               $"Error occurred while updating a {_modelName} object in the database.  {_modelName} object with id '{id}' was not found in the database.",
+               $"{_modelName} object with id '{id}' was not found.",
                new NotFoundException());
         }
 
@@ -151,7 +151,7 @@ public abstract class Service<TModel, TId> : IService<TModel, TId>
         if (affectedCount is null || !affectedCount.HasValue)
         {
             return new ServiceResponse<int>(true,
-               $"Error occurred while deleting a {_modelName} object from the database.  {_modelName} object with id '{id}' was not found in the database.",
+               $"{_modelName} object with id '{id}' was not found.",
                new NotFoundException());
         }
 
