@@ -49,6 +49,12 @@ public static class ServiceExtensions
             .AddScoped<IRepository<OrderItem, int>, OrderItemRepository>()
             .AddScoped<IRepository<Order, int>, OrderRepository>()
             .AddScoped<IRepository<Product, int>, ProductRepository>();
-            //.AddScoped<IRepository<Product>, CachedProductRepository>();
+            //.AddScoped<IRepository<Product, int>>(serviceProvider =>
+            //    new CachedRepository<Product, int>(
+            //        logger: serviceProvider.GetRequiredService<ILogger<ProductRepository>>(),
+            //        repository: new ProductRepository(
+            //            serviceProvider.GetRequiredService<ILogger<ProductRepository>>(),
+            //            serviceProvider.GetRequiredService<OatShopDbContext>(),
+            //            serviceProvider.GetRequiredService<IMapper<Entities.Product, Product>>())));
     }
 }
