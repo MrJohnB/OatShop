@@ -1,4 +1,5 @@
 ﻿using LiteBulb.OatShop.Domain.Dtos;
+using LiteBulb.OatShop.Shared.Exceptions;
 using LiteBulb.OatShop.Shared.Services.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,12 +44,11 @@ public class ProductsController : ControllerBase
 
         if (response.HasErrors)
         {
-            return NotFound(response.ErrorMessage);
-        }
-
-        if (response.Result is null || response.Result.Count == 0)
-        {
-            return NotFound();
+            return response.Exception switch
+            {
+                NotFoundException => NotFound(response.ErrorMessage),
+                _ => StatusCode(StatusCodes.Status500InternalServerError, response.ErrorMessage)
+            };
         }
 
         return Ok(response.Result);
@@ -72,11 +72,6 @@ public class ProductsController : ControllerBase
     {
         _logger.LogDebug($"Entering controller method: {nameof(GetByIdAsync)}");
 
-        if (id == default)
-        {
-            return BadRequest($"Id parameter cannot contain default value: '{id}' for Find By Id.");
-        }
-
         var response = await _productService.GetAsync(id);
 
         if (response is null)
@@ -86,12 +81,12 @@ public class ProductsController : ControllerBase
 
         if (response.HasErrors)
         {
-            return NotFound(response.ErrorMessage);
-        }
-
-        if (response.Result is null)
-        {
-            return NotFound();
+            return response.Exception switch
+            {
+                BadRequestException => BadRequest(response.ErrorMessage),
+                NotFoundException => NotFound(response.ErrorMessage),
+                _ => StatusCode(StatusCodes.Status500InternalServerError)
+            };
         }
 
         return Ok(response.Result);
@@ -114,11 +109,6 @@ public class ProductsController : ControllerBase
     {
         _logger.LogDebug($"Entering controller method: {nameof(CreateAsync)}");
 
-        if (product is null)
-        {
-            return BadRequest("Product object payload cannot be null for Create.");
-        }
-
         if (product.Id is not null and not 0)
         {
             return BadRequest($"Product.Id property must be null (or absent) or {default(int)} for Create.");
@@ -133,17 +123,16 @@ public class ProductsController : ControllerBase
 
         if (response.HasErrors)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, response.ErrorMessage);
-        }
-
-        if (response.Result is null)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError);
+            return response.Exception switch
+            {
+                BadRequestException => BadRequest(response.ErrorMessage),
+                _ => StatusCode(StatusCodes.Status500InternalServerError, response.ErrorMessage)
+            };
         }
 
         return CreatedAtAction(
             actionName: nameof(GetByIdAsync),
-            routeValues: new { response.Result.Id },
+            routeValues: new { response.Result?.Id },
             value: response.Result);
     }
 
@@ -167,16 +156,6 @@ public class ProductsController : ControllerBase
     {
         _logger.LogDebug($"Entering controller method: {nameof(UpdateAsync)}");
 
-        if (product is null)
-        {
-            return BadRequest("Product object payload cannot be null for Update.");
-        }
-
-        if (id == default)
-        {
-            return BadRequest($"Id parameter cannot contain default value: '{id}' for Update.");
-        }
-
         if (product.Id is not null and not 0)
         {
             return BadRequest($"Product.Id property must be null (or absent) or {default(int)} for Update.");
@@ -191,7 +170,12 @@ public class ProductsController : ControllerBase
 
         if (response.HasErrors)
         {
-            return NotFound(response.ErrorMessage);
+            return response.Exception switch
+            {
+                BadRequestException => BadRequest(response.ErrorMessage),
+                NotFoundException => NotFound(response.ErrorMessage),
+                _ => StatusCode(StatusCodes.Status500InternalServerError)
+            };
         }
 
         return Ok(response.Result);
@@ -215,11 +199,6 @@ public class ProductsController : ControllerBase
     {
         _logger.LogDebug($"Entering controller method: {nameof(DeleteByIdAsync)}");
 
-        if (id == default)
-        {
-            return BadRequest($"Id parameter cannot contain default value: '{id}' for Delete By Id.");
-        }
-
         var response = await _productService.DeleteAsync(id);
 
         if (response is null)
@@ -229,7 +208,12 @@ public class ProductsController : ControllerBase
 
         if (response.HasErrors)
         {
-            return NotFound(response.ErrorMessage);
+            return response.Exception switch
+            {
+                BadRequestException => BadRequest(response.ErrorMessage),
+                NotFoundException => NotFound(response.ErrorMessage),
+                _ => StatusCode(StatusCodes.Status500InternalServerError)
+            };
         }
 
         return Ok(response.Result);

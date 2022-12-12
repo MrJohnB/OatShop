@@ -61,7 +61,7 @@ public abstract class Repository<TEntity, TModel, TId> : IRepository<TModel, TId
 
     public virtual async Task<int?> UpdateAsync(TId id, TModel model)
     {
-        ArgumentNullException.ThrowIfNull(id, nameof(model));
+        ArgumentNullException.ThrowIfNull(id, nameof(id));
 
         // TODO: avoid 2 round trips to the database?
 
