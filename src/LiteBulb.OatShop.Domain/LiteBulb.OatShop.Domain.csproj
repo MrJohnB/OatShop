@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LiteBulb.OatShop.Shared\LiteBulb.OatShop.Shared.csproj" />
-  </ItemGroup>
-
 </Project>

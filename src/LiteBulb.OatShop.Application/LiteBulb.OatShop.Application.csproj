@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LiteBulb.OatShop.Domain\LiteBulb.OatShop.Domain.csproj" />
+    <ProjectReference Include="..\LiteBulb.OatShop.Shared\LiteBulb.OatShop.Shared.csproj" />
   </ItemGroup>
 
 </Project>
