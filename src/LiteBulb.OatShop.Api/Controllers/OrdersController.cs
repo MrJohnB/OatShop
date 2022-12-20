@@ -24,6 +24,7 @@ public class OrdersController : ControllerBase
     /// </summary>
     /// <remarks>Returns 404 Not Found if list is empty</remarks>
     /// <example>GET api/v1/Orders</example>
+    /// <returns>Order object collection</returns>
     /// <response code="200" cref="Order">Retrieved list of objects</response>
     /// <response code="404">Not Found</response>
     /// <response code="500">Internal Server Error</response>
@@ -59,6 +60,7 @@ public class OrdersController : ControllerBase
     /// </summary>
     /// <example>GET api/v1/Orders/5</example>
     /// <param name="id">Id of the Order to retreive</param>
+    /// <returns>Order object</returns>
     /// <response code="200" cref="Order">Retrieved object</response>
     /// <response code="400">Bad Request</response>
     /// <response code="404">Not Found</response>
@@ -98,6 +100,7 @@ public class OrdersController : ControllerBase
     /// <remarks>Do not set Id field to a non-default value.</remarks>
     /// <example>POST api/Orders</example>
     /// <param name="order">Order object to add (JSON)</param>
+    /// <returns>Resource URI location of newly created object</returns>
     /// <response code="201" cref="Order">Created object</response>
     /// <response code="400">Bad Request</response>
     /// <response code="500">Internal Server Error</response>
@@ -143,6 +146,7 @@ public class OrdersController : ControllerBase
     /// <example>PUT api/Orders/5</example>
     /// <param name="id">Id of the object to update</param>
     /// <param name="order">Order object to update (JSON)</param>
+    /// <returns>Number of updated objects</returns>
     /// <response code="200">Number of updated objects</response>
     /// <response code="400">Bad Request</response>
     /// <response code="404">Not Found</response>
@@ -186,6 +190,7 @@ public class OrdersController : ControllerBase
     /// </summary>
     /// <example>DELETE api/Orders/5</example>
     /// <param name="id">Id of the object to delete</param>
+    /// <returns>Number of deleted objects</returns>
     /// <response code="200">Number of deleted objects</response>
     /// <response code="400">Bad Request</response>
     /// <response code="404">Not Found</response>

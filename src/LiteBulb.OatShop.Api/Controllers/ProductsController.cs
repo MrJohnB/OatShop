@@ -24,6 +24,7 @@ public class ProductsController : ControllerBase
     /// </summary>
     /// <remarks>Returns 404 Not Found if list is empty</remarks>
     /// <example>GET api/v1/Products</example>
+    /// <returns>Product object collection</returns>
     /// <response code="200" cref="Product">Retrieved list of objects</response>
     /// <response code="404">Not Found</response>
     /// <response code="500">Internal Server Error</response>
@@ -59,6 +60,7 @@ public class ProductsController : ControllerBase
     /// </summary>
     /// <example>GET api/v1/Products/5</example>
     /// <param name="id">Id of the Product to retreive</param>
+    /// <returns>Product object</returns>
     /// <response code="200" cref="Product">Retrieved object</response>
     /// <response code="400">Bad Request</response>
     /// <response code="404">Not Found</response>
@@ -98,6 +100,7 @@ public class ProductsController : ControllerBase
     /// <remarks>Do not set Id field to a non-default value.</remarks>
     /// <example>POST api/s</example>
     /// <param name="product">Product object to add (JSON)</param>
+    /// <returns>Resource URI location of newly created object</returns>
     /// <response code="201" cref="Product">Created object</response>
     /// <response code="400">Bad Request</response>
     /// <response code="500">Internal Server Error</response>
@@ -143,6 +146,7 @@ public class ProductsController : ControllerBase
     /// <example>PUT api/Products/5</example>
     /// <param name="id">Id of the object to update</param>
     /// <param name="product">Product object to update (JSON)</param>
+    /// <returns>Number of updated objects</returns>
     /// <response code="200">Number of updated objects</response>
     /// <response code="400">Bad Request</response>
     /// <response code="404">Not Found</response>
@@ -186,6 +190,7 @@ public class ProductsController : ControllerBase
     /// </summary>
     /// <example>DELETE api/Products/5</example>
     /// <param name="id">Id of the object to delete</param>
+    /// <returns>Number of deleted objects</returns>
     /// <response code="200">Number of deleted objects</response>
     /// <response code="400">Bad Request</response>
     /// <response code="404">Not Found</response>

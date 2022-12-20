@@ -24,6 +24,7 @@ public class CustomersController : ControllerBase
     /// </summary>
     /// <remarks>Returns 404 Not Found if list is empty</remarks>
     /// <example>GET api/v1/Customers</example>
+    /// <returns>Customer object collection</returns>
     /// <response code="200" cref="Customer">Retrieved list of objects</response>
     /// <response code="404">Not Found</response>
     /// <response code="500">Internal Server Error</response>
@@ -59,6 +60,7 @@ public class CustomersController : ControllerBase
     /// </summary>
     /// <example>GET api/v1/Customers/5</example>
     /// <param name="id">Id of the Customer to retreive</param>
+    /// <returns>Customer object</returns>
     /// <response code="200" cref="Customer">Retrieved object</response>
     /// <response code="400">Bad Request</response>
     /// <response code="404">Not Found</response>
@@ -98,6 +100,7 @@ public class CustomersController : ControllerBase
     /// <remarks>Do not set Id field to a non-default value.</remarks>
     /// <example>POST api/Customers</example>
     /// <param name="customer">Customer object to add (JSON)</param>
+    /// <returns>Resource URI location of newly created object</returns>
     /// <response code="201" cref="Customer">Created object</response>
     /// <response code="400">Bad Request</response>
     /// <response code="500">Internal Server Error</response>
@@ -143,6 +146,7 @@ public class CustomersController : ControllerBase
     /// <example>PUT api/Customers/5</example>
     /// <param name="id">Id of the object to update</param>
     /// <param name="customer">Customer object to update (JSON)</param>
+    /// <returns>Number of updated objects</returns>
     /// <response code="200">Number of updated objects</response>
     /// <response code="400">Bad Request</response>
     /// <response code="404">Not Found</response>
@@ -186,6 +190,7 @@ public class CustomersController : ControllerBase
     /// </summary>
     /// <example>DELETE api/Customers/5</example>
     /// <param name="id">Id of the object to delete</param>
+    /// <returns>Number of deleted objects</returns>
     /// <response code="200">Number of deleted objects</response>
     /// <response code="400">Bad Request</response>
     /// <response code="404">Not Found</response>

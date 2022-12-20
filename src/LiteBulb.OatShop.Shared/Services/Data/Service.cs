@@ -10,6 +10,8 @@ public abstract class Service<TModel, TId> : IService<TModel, TId>
 
     private readonly string _modelName = typeof(TModel).Name;
 
+    protected string ModelName => _modelName;
+
     public Service(ILogger logger, IRepository<TModel, TId> repository)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
