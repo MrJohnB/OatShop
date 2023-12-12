@@ -18,7 +18,7 @@ public abstract class Service<TModel, TId> : IService<TModel, TId>
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
     }
 
-    private bool IsDefaultValue(TId value) => EqualityComparer<TId>.Default.Equals(value, default);
+    private static bool IsDefaultValue(TId value) => EqualityComparer<TId>.Default.Equals(value, default);
 
     public virtual async Task<ServiceResponse<IReadOnlyList<TModel>>> GetAsync()
     {

@@ -13,5 +13,5 @@ public class Customer : Dto
     public string State { get; set; } = string.Empty;
     public string County { get; set; } = string.Empty;
     public string Country { get; set; } = string.Empty;
-    public virtual IReadOnlyCollection<Order> Orders { get; set; } = null!;
+    public IReadOnlyCollection<Order> Orders { get; set; } = null!;
 }

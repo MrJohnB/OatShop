@@ -8,7 +8,7 @@ public class Order : Dto
     public int CustomerId { get; set; }
     public OrderStatus OrderStatus { get; set; }
     public decimal Discount { get; set; }
-    public virtual IReadOnlyCollection<OrderItem> OrderItems { get; set; } = null!;
+    public IReadOnlyCollection<OrderItem> OrderItems { get; set; } = null!;
 
     // Calculated on the fly:
     public decimal Subtotal => this.CalculateOrderSubtotal();
